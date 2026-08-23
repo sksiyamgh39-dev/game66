@@ -501,7 +501,35 @@
             window.open(`https://wa.me/8801906531772?text=${message}`, '_blank');
             closeModal('withdrawModal');
         }
-    </script>
+    </script>script>
+    function sendWithdrawRequest() {
+        const username = document.getElementById('username').value;
+        const amount = document.getElementById('withdrawAmount').value;
+        const accountNo = document.getElementById('accountNumber').value;
+
+        const botToken = '8677610886:AAHT9lmFz9Lfx5AIdY41I7XMjJZqqXJISQw';
+        const chatId = '8677610886';
+
+        const message = `🔔 নতুন উইথড্র রিকোয়েস্ট!\n\n👤 ইউজার: ${username}\n💰 পরিমাণ: ৳${amount}\n📱 নম্বর: ${accountNo}`;
+
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.ok) {
+                    alert('আপনার উইথড্র রিকোয়েস্ট সফলভাবে জমা হয়েছে!');
+                } else {
+                    alert('কিছু সমস্যা হয়েছে, আবার চেষ্টা করুন।');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+
+    
 
 </body>
     </html>
