@@ -1,43 +1,256 @@
-<div class="card">
-  <h2>🔐 Account Activation</h2>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game66 Demo</title>
 
-  <p>অ্যাকাউন্ট অ্যাক্টিভ করতে হবে টাকা দিয়ে: <b>৳50</b></p>
-  <p>Demo bKash: <b>01906531772</b></p>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-  <button class="big-btn" onclick="activateDemo()">
-    Activate Account
-  </button>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+    }
 
-  <p id="status"></p>
+    .container {
+      max-width: 430px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 24px;
+      margin-top: 30px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,.12);
+      text-align: center;
+    }
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 10px;
+      background: #198754;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    .secondary {
+      background: #555;
+    }
+
+    .balance {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .game-box {
+      background: #f0f2f5;
+      padding: 20px;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .demo {
+      font-size: 13px;
+      color: #777;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- LOGIN -->
+  <div id="loginPage" class="card">
+    <h1>🎮 Game66</h1>
+    <h2>Login</h2>
+
+    <input
+      type="text"
+      id="username"
+      placeholder="আপনার নাম"
+    >
+
+    <input
+      type="password"
+      id="password"
+      placeholder="পাসওয়ার্ড"
+    >
+
+    <button onclick="login()">
+      Login
+    </button>
+
+    <p id="loginMessage" class="message"></p>
+
+    <p class="demo">
+      Demo website — কোনো বাস্তব টাকা লেনদেন নেই
+    </p>
+  </div>
+
+
+  <!-- ACTIVATION -->
+  <div id="activationPage" class="card hidden">
+    <h2>🔐 Account Activation</h2>
+
+    <p>
+      Demo Account Activation
+    </p>
+
+    <p>
+      Demo Fee: <b>৳50</b>
+    </p>
+
+    <p>
+      Demo bKash: <b>01906531772</b>
+    </p>
+
+    <button onclick="activateAccount()">
+      Activate Demo Account
+    </button>
+
+    <p id="activationMessage" class="message"></p>
+
+    <p class="demo">
+       bKash 01906531772
+    </p>
+  </div>
+
+
+  <!-- GAME -->
+  <div id="gamePage" class="card hidden">
+    <h2>🎮 Game Page</h2>
+
+    <p>
+      স্বাগতম, <b id="playerName"></b>
+    </p>
+
+    <div class="balance">
+      Demo Balance: ৳<span id="balance">0</span>
+    </div>
+
+    <div class="game-box">
+      <h3>🖱️ Click Game</h3>
+
+      <p>
+        Button চাপুন এবং Demo Score বাড়ান।
+      </p>
+
+      <button onclick="playGame()">
+        CLICK 🎯
+      </button>
+
+      <p id="gameMessage" class="message"></p>
+    </div>
+
+    <button class="secondary" onclick="logout()">
+      Logout
+    </button>
+
+    <p class="demo">
+      Demo game only — কোনো cash prize নেই।
+    </p>
+  </div>
+
 </div>
 
+
 <script>
-function activateDemo() {
-  document.getElementById("status").innerHTML =
-    "✅ Demo account activated successfully!";
-}
+  let player = "";
+  let balance = 0;
+
+
+  function login() {
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (username === "" || password === "") {
+      document.getElementById("loginMessage").textContent =
+        "⚠️ নাম এবং পাসওয়ার্ড দিন।";
+      return;
+    }
+
+    player = username;
+
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("activationPage").classList.remove("hidden");
+
+    document.getElementById("activationMessage").textContent = "";
+  }
+
+
+  function activateAccount() {
+    document.getElementById("activationPage").classList.add("hidden");
+    document.getElementById("gamePage").classList.remove("hidden");
+
+    document.getElementById("playerName").textContent = player;
+
+    balance = 0;
+    document.getElementById("balance").textContent = balance;
+  }
+
+
+  function playGame() {
+    balance += 1;
+
+    document.getElementById("balance").textContent = balance;
+
+    document.getElementById("gameMessage").textContent =
+      "🎉 Demo point added!";
+  }
+
+
+  function logout() {
+    player = "";
+    balance = 0;
+
+    document.getElementById("gamePage").classList.add("hidden");
+    document.getElementById("loginPage").classList.remove("hidden");
+
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("loginMessage").textContent = "";
+  }
 </script>
 
-<style>
-.card {
-  max-width: 420px;
-  margin: 40px auto;
-  padding: 25px;
-  text-align: center;
-  border-radius: 15px;
-  background: #fff;
-  box-shadow: 0 5px 20px #ccc;
-  font-family: Arial, sans-serif;
-}
-
-.big-btn {
-  width: 100%;
-  padding: 14px;
-  border: 0;
-  border-radius: 10px;
-  background: #198754;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-}
-</style>
+</body>
+  </html>
