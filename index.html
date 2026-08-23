@@ -159,7 +159,7 @@
         .modal-title {
             font-size: 20px;
             font-weight: bold;
-            color: #28a745;
+            color: #ff9800;
             margin-bottom: 10px;
         }
         .notice-text {
@@ -224,7 +224,7 @@
         
         <div class="action-grid">
             <button class="action-btn" onclick="openDeposit()">💰 Deposit</button>
-            <button class="action-btn" onclick="openGame('Withdraw')">💳 Withdraw</button>
+            <button class="action-btn" onclick="openWithdraw()">💳 Withdraw</button>
             <button class="action-btn" onclick="openGame('Wallet')">👛 Wallet</button>
             <button class="action-btn" onclick="openGame('VIP')">💎 VIP</button>
         </div>
@@ -253,7 +253,7 @@
 <!-- Deposit Modal Popup -->
 <div class="modal" id="depositModal">
     <div class="modal-content">
-        <div class="modal-title">💰 Deposit Info</div>
+        <div class="modal-title" style="color: #28a745;">💰 Deposit Info</div>
         <p class="notice-text">⚠️ শুধুমাত্র সেন্ড মানি করে ডিপোজিট করবেন। ৫ মিনিটের ভেতরে টাকা পেয়ে যাবেন।</p>
         <p style="font-size: 13px; color: #555;">বিকাশ/নগদ/রকেট পার্সোনাল নাম্বার:</p>
         <div class="number-box" id="num">01906531772</div>
@@ -272,6 +272,22 @@
     </div>
 </div>
 
+<!-- Withdraw Modal Popup -->
+<div class="modal" id="withdrawModal">
+    <div class="modal-content">
+        <div class="modal-title">💳 Withdraw Request</div>
+        <p class="notice-text">⚠️ ২০০ টাকা থেকে ২৫০০০ টাকা পর্যন্ত উত্তোলন করতে পারবেন।</p>
+
+        <input type="number" id="wAmount" class="input-box" placeholder="উইথড্র টাকার পরিমাণ (200 - 25000)">
+        <input type="text" id="wNumber" class="input-box" placeholder="আপনার বিকাশ/নগদ নাম্বার">
+
+        <div class="btn-group">
+            <button class="submit-btn" onclick="submitWithdraw()">Submit</button>
+            <button class="close-btn" onclick="closeWithdraw()">Close</button>
+        </div>
+    </div>
+</div>
+
 <script>
     function openGame(name) {
         alert(name + ' অপশনটি শীঘ্রই চালু হবে!');
@@ -283,6 +299,14 @@
 
     function closeDeposit() {
         document.getElementById('depositModal').style.display = 'none';
+    }
+
+    function openWithdraw() {
+        document.getElementById('withdrawModal').style.display = 'flex';
+    }
+
+    function closeWithdraw() {
+        document.getElementById('withdrawModal').style.display = 'none';
     }
 
     function copyNumber() {
@@ -305,7 +329,28 @@
         document.getElementById('trxId').value = '';
         closeDeposit();
     }
+
+    function submitWithdraw() {
+        var amount = Number(document.getElementById('wAmount').value);
+        var number = document.getElementById('wNumber').value;
+
+        if(!amount || !number) {
+            alert('অনুগ্রহ করে টাকার পরিমাণ এবং নাম্বার দিন!');
+            return;
+        }
+
+        if(amount < 200 || amount > 25000) {
+            alert('উইথড্র পরিমাণ ২০০ টাকা থেকে ২৫০০০ টাকার মধ্যে হতে হবে!');
+            return;
+        }
+
+        alert('আপনার উইথড্র রিকোয়েস্ট সফল হয়েছে!\nপরিমাণ: ৳' + amount + '\nনাম্বার: ' + number);
+        document.getElementById('wAmount').value = '';
+        document.getElementById('wNumber').value = '';
+        closeWithdraw();
+    }
 </script>
 
 </body>
-</html>
+                </html>
+            
