@@ -83,7 +83,6 @@
 
         let multiplier = 1.00;
         let crashPoint = 1.00;
-        let animationFrame;
         let planeX = 0;
         let planeY = 0;
 
@@ -136,7 +135,6 @@
         function drawGraph() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            // Draw Line Curve
             if(isRunning) {
                 ctx.beginPath();
                 ctx.moveTo(0, canvas.height);
@@ -145,7 +143,6 @@
                 ctx.lineWidth = 4;
                 ctx.stroke();
 
-                // Draw Plane
                 ctx.font = '28px Arial';
                 ctx.fillText('✈️', planeX - 15, planeY + 10);
             }
@@ -198,8 +195,13 @@
 
         setTimeout(startRound, 1000);
     </script>
+
+    <!-- App Download Button -->
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="https://www.appsgeyser.com" target="_blank" style="display: inline-block; background: #28a745; color: white; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+           📲 Download Android App (APK)
+        </a>
+    </div>
+
 </body>
 </html>
-<a href="আপনার_ড্রাইভের_কপি_করা_লিংক" style="display: inline-block; background: #28a745; color: white; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 8px; text-decoration: none; margin: 10px 0;">
-   📲 Download Android App
-</a>
