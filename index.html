@@ -54,7 +54,7 @@
             color: #e0f7ff;
         }
 
-        /* গেম গ্রিড লেআউট */
+        /* গেম গ্রিড লেআউট (৬টি গেমের জন্য) */
         .casino-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -69,6 +69,13 @@
             flex-direction: column;
             gap: 6px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .casino-card:active {
+            transform: scale(0.95);
         }
 
         .card-img {
@@ -163,26 +170,55 @@
             </div>
         </div>
 
-        <!-- গেম লিস্ট -->
+        <!-- ৬টি গেমের লিস্ট (লাইভ লিঙ্কসহ) -->
         <div class="casino-grid">
-            <div class="casino-card">
+            <!-- Crazy Time -->
+            <a href="#" class="casino-card" target="_blank">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Crazy Time</p>
-            </div>
-            <div class="casino-card">
+            </a>
+
+            <!-- Ice Fishing -->
+            <a href="#" class="casino-card" target="_blank">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Ice Fishing</p>
-            </div>
-            <div class="casino-card">
+            </a>
+
+            <!-- Bac Bo -->
+            <a href="#" class="casino-card" target="_blank">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Bac Bo</p>
-            </div>
+            </a>
+
+            <!-- Funky Time -->
+            <a href="#" class="casino-card" target="_blank">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300');">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                </div>
+                <p>Funky Time</p>
+            </a>
+
+            <!-- Mega Wheel -->
+            <a href="#" class="casino-card" target="_blank">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=300');">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                </div>
+                <p>Mega Wheel</p>
+            </a>
+
+            <!-- Auto-Roulette -->
+            <a href="#" class="casino-card" target="_blank">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300');">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                </div>
+                <p>Auto-Roulette</p>
+            </a>
         </div>
     </div>
 
@@ -192,7 +228,6 @@
             <i class="fa-solid fa-share"></i>
             <span>INDIQUE</span>
         </a>
-        <!-- আপনার হোয়াটসঅ্যাপ নম্বর এখানে যুক্ত করা হয়েছে -->
         <a href="https://wa.me/8801906531772" target="_blank" class="float-btn whatsapp-btn">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
