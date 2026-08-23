@@ -1,60 +1,159 @@
-<section class="games">
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game66 Demo</title>
 
-  <div class="game">
-    <div class="game-img game1">
-      <span>👑</span>
-      <b>SUPER<br>ACE</b>
-    </div>
-    <div class="game-name">Super Ace Demo</div>
-    <button class="play" onclick="playGame('Super Ace Demo')">PLAY</button>
-  </div>
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-  <div class="game">
-    <div class="game-img game2">
-      <span>7️⃣</span>
-      <b>FIERY<br>SEVENS</b>
-    </div>
-    <div class="game-name">Fiery Sevens Demo</div>
-    <button class="play" onclick="playGame('Fiery Sevens Demo')">PLAY</button>
-  </div>
+body{
+  font-family:Arial,sans-serif;
+  background:#063f43;
+  color:white;
+  padding-bottom:82px;
+}
 
-  <div class="game">
-    <div class="game-img game3">
-      <span>🚀</span>
-      <b>SPACE<br>RUN</b>
-    </div>
-    <div class="game-name">Space Run</div>
-    <button class="play" onclick="playGame('Space Run')">PLAY</button>
-  </div>
+.header{
+  height:72px;
+  background:#07575a;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 3px 12px rgba(0,0,0,.25);
+}
 
-  <div class="game">
-    <div class="game-img game4">
-      <span>🏎️</span>
-      <b>SPEED<br>RACE</b>
-    </div>
-    <div class="game-name">Speed Race</div>
-    <button class="play" onclick="playGame('Speed Race')">PLAY</button>
-  </div>
+.menu{
+  font-size:32px;
+}
 
-  <div class="game">
-    <div class="game-img game5">
-      <span>🏝️</span>
-      <b>JUNGLE<br>QUEST</b>
-    </div>
-    <div class="game-name">Jungle Quest</div>
-    <button class="play" onclick="playGame('Jungle Quest')">PLAY</button>
-  </div>
+.logo{
+  font-size:28px;
+  font-weight:bold;
+  color:#ff9b38;
+}
 
-  <div class="game">
-    <div class="game-img game6">
-      <span>🧙</span>
-      <b>MAGIC<br>WORLD</b>
-    </div>
-    <div class="game-name">Magic World</div>
-    <button class="play" onclick="playGame('Magic World')">PLAY</button>
-  </div>
+.logo span{
+  color:white;
+}
 
-</section>.game-img{
+.profile{
+  background:#073b45;
+  padding:10px 14px;
+  border-radius:20px;
+  color:#20ffd0;
+  font-weight:bold;
+}
+
+.container{
+  padding:14px;
+  max-width:700px;
+  margin:auto;
+}
+
+/* Banner */
+.banner{
+  height:185px;
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 20% 20%,#ffdc43 0 2%,transparent 3%),
+    linear-gradient(135deg,#8d1600,#ff9d00,#7c0500);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  margin-bottom:16px;
+  box-shadow:0 7px 22px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+
+.banner h1{
+  font-size:34px;
+  color:#ffe45c;
+  text-shadow:2px 3px 5px #6b1600;
+}
+
+.banner p{
+  font-size:16px;
+  margin-top:10px;
+}
+
+/* Main buttons */
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.big-btn{
+  background:#06434c;
+  border:1px solid #087b80;
+  border-radius:18px;
+  padding:18px 7px;
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  box-shadow:0 4px 10px rgba(0,0,0,.15);
+}
+
+/* Categories */
+.categories{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  margin:14px 0 25px;
+}
+
+.cat{
+  background:#075158;
+  padding:16px 4px;
+  border-radius:14px;
+  text-align:center;
+  font-weight:bold;
+}
+
+/* Section */
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.section-title h2{
+  color:#20ffd0;
+  font-size:28px;
+}
+
+.see{
+  color:#ffd21c;
+  font-size:16px;
+}
+
+/* Games */
+.games{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
+}
+
+.game{
+  background:#06474c;
+  border-radius:17px;
+  overflow:hidden;
+  box-shadow:0 5px 15px rgba(0,0,0,.35);
+}
+
+.game-img{
   height:210px;
   display:flex;
   flex-direction:column;
@@ -100,3 +199,221 @@
 .game6{
   background:linear-gradient(145deg,#210052,#7437d8,#e23cff);
 }
+
+.game-name{
+  padding:12px;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.play{
+  margin:0 12px 12px;
+  width:calc(100% - 24px);
+  padding:11px;
+  border:0;
+  border-radius:10px;
+  background:#16e8b5;
+  color:#003d3d;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.play:active{
+  transform:scale(.97);
+}
+
+/* Bottom navigation */
+.bottom{
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  height:72px;
+  background:#075158;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid #15999b;
+  z-index:20;
+}
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:13px;
+  color:#c9ffff;
+}
+
+.nav b{
+  font-size:24px;
+  margin-bottom:3px;
+}
+
+.nav.active{
+  color:#ffd21c;
+}
+
+/* Mobile */
+@media(max-width:380px){
+  .logo{
+    font-size:23px;
+  }
+
+  .banner h1{
+    font-size:28px;
+  }
+
+  .game-img{
+    height:185px;
+  }
+
+  .game-img b{
+    font-size:23px;
+  }
+}
+
+@media(min-width:700px){
+  .games{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .game-img{
+    height:220px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="menu">☰</div>
+
+  <div class="logo">
+    CK44<span>|Game</span>
+  </div>
+
+  <div class="profile">
+    G66 👤
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="banner">
+    <div>
+      <h1>GAME66 DEMO</h1>
+      <p>🎮 Play Free • Have Fun • No Money</p>
+    </div>
+  </section>
+
+  <section class="buttons">
+    <div class="big-btn">🎮 Play Games</div>
+    <div class="big-btn">🎁 Rewards</div>
+  </section>
+
+  <section class="categories">
+    <div class="cat">🔥 HOT</div>
+    <div class="cat">⭐ FAVORITE</div>
+    <div class="cat">🎰 SLOTS</div>
+  </section>
+
+  <div class="section-title">
+    <h2>HOT GAMES</h2>
+    <span class="see">See All ›</span>
+  </div>
+
+  <section class="games">
+
+    <div class="game">
+      <div class="game-img game1">
+        <span>👑</span>
+        <b>SUPER<br>ACE</b>
+      </div>
+      <div class="game-name">Super Ace Demo</div>
+      <button class="play" onclick="playGame('Super Ace Demo')">PLAY</button>
+    </div>
+
+    <div class="game">
+      <div class="game-img game2">
+        <span>7️⃣</span>
+        <b>FIERY<br>SEVENS</b>
+      </div>
+      <div class="game-name">Fiery Sevens Demo</div>
+      <button class="play" onclick="playGame('Fiery Sevens Demo')">PLAY</button>
+    </div>
+
+    <div class="game">
+      <div class="game-img game3">
+        <span>🚀</span>
+        <b>SPACE<br>RUN</b>
+      </div>
+      <div class="game-name">Space Run</div>
+      <button class="play" onclick="playGame('Space Run')">PLAY</button>
+    </div>
+
+    <div class="game">
+      <div class="game-img game4">
+        <span>🏎️</span>
+        <b>SPEED<br>RACE</b>
+      </div>
+      <div class="game-name">Speed Race</div>
+      <button class="play" onclick="playGame('Speed Race')">PLAY</button>
+    </div>
+
+    <div class="game">
+      <div class="game-img game5">
+        <span>🏝️</span>
+        <b>JUNGLE<br>QUEST</b>
+      </div>
+      <div class="game-name">Jungle Quest</div>
+      <button class="play" onclick="playGame('Jungle Quest')">PLAY</button>
+    </div>
+
+    <div class="game">
+      <div class="game-img game6">
+        <span>🧙</span>
+        <b>MAGIC<br>WORLD</b>
+      </div>
+      <div class="game-name">Magic World</div>
+      <button class="play" onclick="playGame('Magic World')">PLAY</button>
+    </div>
+
+  </section>
+
+</main>
+
+<nav class="bottom">
+
+  <div class="nav active">
+    <b>⌂</b>
+    Home
+  </div>
+
+  <div class="nav">
+    <b>🎁</b>
+    Rewards
+  </div>
+
+  <div class="nav">
+    <b>🎮</b>
+    Games
+  </div>
+
+  <div class="nav">
+    <b>👤</b>
+    Member
+  </div>
+
+</nav>
+
+<script>
+function playGame(name){
+  alert(name + " চালু হবে — এটি একটি Free Demo Game.");
+}
+</script>
+
+</body>
+</html>
