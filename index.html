@@ -3,240 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Casino & Game App</title>
+    <title>Live Casino Website</title>
+    <!-- FontAwesome আইকনের সিডিএন -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background-color: #f4f6fa; display: flex; justify-content: center; color: #333; }
-        .app-container { width: 100%; max-width: 480px; background: #f4f6fa; min-height: 100vh; position: relative; padding-bottom: 75px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        .page { display: none; }
-        .page.active { display: block; }
+        body {
+            background-color: #1a2332;
+            color: #ffffff;
+            padding: 10px;
+            padding-bottom: 50px;
+        }
 
-        .top-category-bar { display: flex; gap: 15px; overflow-x: auto; padding: 12px 15px; background: #fff; border-bottom: 1px solid #eee; }
-        .cat-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #666; min-width: 50px; }
-        .cat-item.active { color: #ff9800; font-weight: bold; }
-        .cat-icon { font-size: 22px; margin-bottom: 3px; }
+        .casino-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
 
-        .game-section { padding: 15px; }
-        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
-        .game-card { border-radius: 12px; height: 120px; padding: 10px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; color: #fff; font-weight: bold; font-size: 13px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); cursor: pointer; background-size: cover; background-position: center; position: relative; overflow: hidden; }
-        
-        .card-aviator { background: linear-gradient(135deg, #b71c1c, #880e4f); }
-        .card-wingo { background: linear-gradient(135deg, #f57c00, #e65100); }
-        .card-boom { background: linear-gradient(135deg, #0288d1, #01579b); }
-        .card-chicken { background: linear-gradient(135deg, #d32f2f, #bf360c); }
-        .card-gorush { background: linear-gradient(135deg, #303f9f, #1a237e); }
-        .card-money { background: linear-gradient(135deg, #388e3c, #1b5e20); }
+        /* হেডার ডিজাইন */
+        .casino-header {
+            background: linear-gradient(90deg, #ff8c00, #ff5e00);
+            width: 75%;
+            border-radius: 8px 30px 30px 8px;
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
+        }
 
-        .section-title { font-size: 15px; font-weight: bold; margin-bottom: 10px; color: #444; }
+        .header-title {
+            display: flex;
+            flex-direction: column;
+        }
 
-        .profile-header { background: linear-gradient(180deg, #ffc107 0%, #ff9800 100%); padding: 25px 20px 60px; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; display: flex; align-items: center; gap: 15px; }
-        .avatar-img { width: 65px; height: 65px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; }
-        .user-details { color: #fff; }
-        .username { font-size: 16px; font-weight: bold; }
-        .vip-badge { background: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.6); padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; }
-        .uid-text { font-size: 13px; opacity: 0.9; margin-top: 3px; }
-        .last-login { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+        .header-title .rec {
+            font-size: 13px;
+            font-style: italic;
+            font-weight: bold;
+            color: #fff;
+        }
 
-        .balance-card { background: #fff; margin: -40px 15px 15px; padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); position: relative; z-index: 5; }
-        .balance-val { font-size: 26px; font-weight: bold; color: #111; margin: 5px 0 15px; display: flex; align-items: center; gap: 8px; }
-        .action-grid { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; }
-        .action-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; }
-        .action-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-        .icon-wallet { background: #ffebee; } .icon-deposit { background: #fff3e0; } .icon-withdraw { background: #e3f2fd; } .icon-vip { background: #e8f5e9; }
+        .header-title .live {
+            font-size: 18px;
+            font-weight: 900;
+            color: #e0f7ff;
+        }
 
-        .history-grid { padding: 0 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .history-card { background: #fff; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); cursor: pointer; }
-        .history-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        /* গেম গ্রিড লেআউট */
+        .casino-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
 
-        .list-section { background: #fff; margin: 0 15px; border-radius: 12px; padding: 5px 15px; }
-        .list-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; font-size: 14px; }
-        .list-item:last-child { border-bottom: none; }
+        .casino-card {
+            background: #243044;
+            border-radius: 10px;
+            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
 
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; max-width: 480px; background: #fff; display: flex; justify-around; padding: 8px 0; border-top: 1px solid #eee; z-index: 100; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; font-size: 11px; color: #888; cursor: pointer; }
-        .nav-item.active { color: #ff9800; font-weight: bold; }
-        .spin-wheel-btn { position: relative; top: -12px; background: radial-gradient(circle, #ff9800, #f57c00); width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 9px; box-shadow: 0 4px 10px rgba(255, 152, 0, 0.4); border: 2px solid #fff; }
+        .card-img {
+            width: 100%;
+            height: 110px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            display: flex;
+            justify-content: flex-end;
+            padding: 6px;
+        }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000; }
-        .modal-content { background: #fff; width: 90%; max-width: 360px; padding: 20px; border-radius: 15px; text-align: center; }
-        .input-box { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 6px; }
-        .btn-group { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
-        .submit-btn { background: #28a745; color: white; padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        .close-btn { background: #dc3545; color: white; padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .fav-icon {
+            color: white;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px;
+            border-radius: 50%;
+            height: 25px;
+            width: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .casino-card p {
+            font-size: 12px;
+            color: #b0bec5;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ডানপাশের ফ্লোটিং বাটন */
+        .floating-widgets {
+            position: fixed;
+            right: 15px;
+            bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .float-btn {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 3px solid #ffaa00;
+        }
+
+        .share-btn {
+            background: #ffcc00;
+            color: #1a2332;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .share-btn i {
+            font-size: 14px;
+            margin-bottom: 2px;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            font-size: 24px;
+        }
+
+        .telegram-btn {
+            background: #0088cc;
+            font-size: 22px;
+        }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-
-    <div id="homePage" class="page active">
-        <div class="top-category-bar">
-            <div class="cat-item active"><span class="cat-icon">🎮</span>Lobby</div>
-            <div class="cat-item"><span class="cat-icon">👑</span>Popular</div>
-            <div class="cat-item"><span class="cat-icon">🎰</span>Slots</div>
-            <div class="cat-item"><span class="cat-icon">🚀</span>Mini Game</div>
-            <div class="cat-item"><span class="cat-icon">🎱</span>Lottery</div>
+    <div class="casino-container">
+        <!-- ব্যানার বা হেডার -->
+        <div class="casino-header">
+            <div class="header-title">
+                <span class="rec">RECOMMENDED</span>
+                <span class="live">LIVE CASINO</span>
+            </div>
         </div>
 
-        <div class="game-section">
-            <div class="game-grid">
-                <div class="game-card card-aviator" onclick="location.href='aviator.html'">
-                    <span style="font-size:24px; margin-bottom:10px;">✈️</span>
-                    AVIATOR
+        <!-- গেম লিস্ট -->
+        <div class="casino-grid">
+            <div class="casino-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300');">
+                    <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
-                <div class="game-card card-wingo" onclick="alert('Win Go শীঘ্রই চালু হবে!')">
-                    <span style="font-size:24px; margin-bottom:10px;">🎱</span>
-                    Win Go
-                </div>
-                <div class="game-card card-boom" onclick="alert('Boom গেম শীঘ্রই চালু হবে!')">
-                    <span style="font-size:24px; margin-bottom:10px;">💥</span>
-                    BOOM
-                </div>
-                <div class="game-card card-chicken" onclick="alert('Chicken Road 2 শীঘ্রই চালু হবে!')">
-                    <span style="font-size:24px; margin-bottom:10px;">🐔</span>
-                    CHICKEN ROAD
-                </div>
-                <div class="game-card card-gorush" onclick="alert('Go Rush শীঘ্রই চালু হবে!')">
-                    <span style="font-size:24px; margin-bottom:10px;">🚀</span>
-                    GO RUSH
-                </div>
-                <div class="game-card card-money" onclick="alert('Money Coming শীঘ্রই চালু হবে!')">
-                    <span style="font-size:24px; margin-bottom:10px;">💵</span>
-                    MONEY COMING
-                </div>
+                <p>Crazy Time</p>
             </div>
-
-            <div class="section-title">📦 Slots</div>
-            <div class="game-grid">
-                <div class="game-card" style="background: linear-gradient(135deg, #43a047, #1b5e20);" onclick="alert('Slot Game 1')">JILI Slot</div>
-                <div class="game-card" style="background: linear-gradient(135deg, #fb8c00, #e65100);" onclick="alert('Slot Game 2')">PP Game</div>
-                <div class="game-card" style="background: linear-gradient(135deg, #8e24aa, #4a148c);" onclick="alert('Slot Game 3')">PG Game</div>
+            <div class="casino-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=300');">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                </div>
+                <p>Ice Fishing</p>
+            </div>
+            <div class="casino-card">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300');">
+                    <i class="fa-regular fa-heart fav-icon"></i>
+                </div>
+                <p>Bac Bo</p>
             </div>
         </div>
     </div>
 
-    <div id="accountPage" class="page">
-        <div class="profile-header">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200" class="avatar-img">
-            <div class="user-details">
-                <div><span class="username">MEMBERNNGNFEU3</span> <span class="vip-badge">VIP0</span></div>
-                <div class="uid-text">UID | 451840 📋</div>
-                <div class="last-login">Last login: 2026-08-23 10:12:39</div>
-            </div>
-        </div>
-
-        <div class="balance-card">
-            <div style="font-size:13px; color:#666;">Total balance</div>
-            <div class="balance-val">৳<span id="userBal">0.00</span> <span style="font-size:16px; cursor:pointer;" onclick="location.reload()">🔄</span></div>
-            <div class="action-grid">
-                <div class="action-item" onclick="alert('Wallet details')"><div class="action-icon icon-wallet">👛</div><div style="font-size:12px;">Wallet</div></div>
-                <div class="action-item" onclick="openDeposit()"><div class="action-icon icon-deposit">💰</div><div style="font-size:12px;">Deposit</div></div>
-                <div class="action-item" onclick="openWithdraw()"><div class="action-icon icon-withdraw">💳</div><div style="font-size:12px;">Withdraw</div></div>
-                <div class="action-item" onclick="alert('VIP Menu')"><div class="action-icon icon-vip">💎</div><div style="font-size:12px;">VIP</div></div>
-            </div>
-        </div>
-
-        <div class="history-grid">
-            <div class="history-card"><div class="history-icon" style="background:#e3f2fd; color:#1976d2;">📘</div><div><b>Game History</b><p style="font-size:10px; color:#888;">My game history</p></div></div>
-            <div class="history-card"><div class="history-icon" style="background:#e8f5e9; color:#388e3c;">📊</div><div><b>Transaction</b><p style="font-size:10px; color:#888;">My transaction history</p></div></div>
-            <div class="history-card"><div class="history-icon" style="background:#ffebee; color:#d32f2f;">📥</div><div><b>Deposit</b><p style="font-size:10px; color:#888;">My deposit history</p></div></div>
-            <div class="history-card"><div class="history-icon" style="background:#fff3e0; color:#f57c00;">📤</div><div><b>Withdraw</b><p style="font-size:10px; color:#888;">My withdraw history</p></div></div>
-        </div>
-
-        <div class="list-section">
-            <div class="list-item"><span>💛 Notification</span> <span>❯</span></div>
-            <div class="list-item"><span>🎁 Gifts</span> <span>❯</span></div>
-            <div class="list-item"><span>📊 Game statistics</span> <span>❯</span></div>
-            <div class="list-item"><span>🌐 Language</span> <span style="color:#888;">English ❯</span></div>
-        </div>
+    <!-- ফ্লোটিং বাটন (WhatsApp ও Telegram) -->
+    <div class="floating-widgets">
+        <a href="#" class="float-btn share-btn">
+            <i class="fa-solid fa-share"></i>
+            <span>INDIQUE</span>
+        </a>
+        <!-- আপনার হোয়াটসঅ্যাপ নম্বর এখানে যুক্ত করা হয়েছে -->
+        <a href="https://wa.me/8801906531772" target="_blank" class="float-btn whatsapp-btn">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a href="https://t.me/your-username" target="_blank" class="float-btn telegram-btn">
+            <i class="fa-brands fa-telegram"></i>
+        </a>
     </div>
-
-    <div class="bottom-nav">
-        <div class="nav-item active" id="navHome" onclick="switchPage('home')">
-            <span style="font-size:18px;">🎮</span>
-            Home
-        </div>
-        <div class="nav-item" onclick="alert('Activity Page')">
-            <span style="font-size:18px;">🎁</span>
-            Activity
-        </div>
-        <div class="spin-wheel-btn">Get ৳500</div>
-        <div class="nav-item" onclick="alert('Promotion Page')">
-            <span style="font-size:18px;">🤝</span>
-            Promotion
-        </div>
-        <div class="nav-item" id="navAccount" onclick="switchPage('account')">
-            <span style="font-size:18px;">👤</span>
-            Account
-        </div>
-    </div>
-
-</div>
-
-<div class="modal" id="depositModal">
-    <div class="modal-content">
-        <h3>💰 Deposit Info</h3>
-        <p style="font-size:12px; color:#d9534f; margin:8px 0;">বিকাশ/নগদ: <b>01906531772</b></p>
-        <input type="number" id="depAmount" class="input-box" placeholder="টাকার পরিমাণ">
-        <input type="text" id="trxId" class="input-box" placeholder="TrxID দিন">
-        <div class="btn-group">
-            <button class="submit-btn" onclick="submitDeposit()">Submit</button>
-            <button class="close-btn" onclick="closeModal('depositModal')">Close</button>
-        </div>
-    </div>
-</div>
-
-<div class="modal" id="withdrawModal">
-    <div class="modal-content">
-        <h3>💳 Withdraw Request</h3>
-        <input type="number" id="wAmount" class="input-box" placeholder="উইথড্র পরিমাণ (200 - 25000)">
-        <input type="text" id="wNumber" class="input-box" placeholder="বিকাশ/নগদ নাম্বার">
-        <div class="btn-group">
-            <button class="submit-btn" onclick="submitWithdraw()">Submit</button>
-            <button class="close-btn" onclick="closeModal('withdrawModal')">Close</button>
-        </div>
-    </div>
-</div>
-
-<script>
-    function switchPage(page) {
-        document.getElementById('homePage').classList.remove('active');
-        document.getElementById('accountPage').classList.remove('active');
-        document.getElementById('navHome').classList.remove('active');
-        document.getElementById('navAccount').classList.remove('active');
-
-        if(page === 'home') {
-            document.getElementById('homePage').classList.add('active');
-            document.getElementById('navHome').classList.add('active');
-        } else if(page === 'account') {
-            document.getElementById('accountPage').classList.add('active');
-            document.getElementById('navAccount').classList.add('active');
-        }
-    }
-
-    function openDeposit() { document.getElementById('depositModal').style.display = 'flex'; }
-    function openWithdraw() { document.getElementById('withdrawModal').style.display = 'flex'; }
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-    function submitDeposit() {
-        let amt = document.getElementById('depAmount').value;
-        let trx = document.getElementById('trxId').value;
-        if(!amt || !trx) { alert('সব তথ্য দিন!'); return; }
-        alert('ডিপোজিট রিকোয়েস্ট সফল হয়েছে!');
-        closeModal('depositModal');
-    }
-
-    function submitWithdraw() {
-        let amt = Number(document.getElementById('wAmount').value);
-        let num = document.getElementById('wNumber').value;
-        if(!amt || !num) { alert('সব তথ্য দিন!'); return; }
-        if(amt < 200 || amt > 25000) { alert('উইথড্র ২০০ থেকে ২৫০০০ টাকার মধ্যে হতে হবে!'); return; }
-        alert('উইথড্র রিকোয়েস্ট সফল হয়েছে!');
-        closeModal('withdrawModal');
-    }
-</script>
 
 </body>
-                                                                    </html>
-
+</html>
