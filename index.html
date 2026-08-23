@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Casino Website</title>
+    <title>Live Casino & Banking System</title>
     <!-- FontAwesome আইকনের সিডিএন -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -18,13 +18,48 @@
             background-color: #1a2332;
             color: #ffffff;
             padding: 10px;
-            padding-bottom: 50px;
+            padding-bottom: 70px;
         }
 
         .casino-container {
             max-width: 500px;
             margin: 0 auto;
         }
+
+        /* ব্যালেন্স ও উইথড্র বার */
+        .wallet-bar {
+            background: #243044;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 1px solid #334155;
+        }
+
+        .wallet-bar .balance {
+            font-size: 14px;
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mini-btn {
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .deposit-mini { background: #eab308; color: #000; }
+        .withdraw-mini { background: #ef4444; color: #fff; }
 
         /* হেডার ডিজাইন */
         .casino-header {
@@ -54,7 +89,7 @@
             color: #e0f7ff;
         }
 
-        /* গেম গ্রিড লেআউট (৬টি গেমের জন্য) */
+        /* গেম গ্রিড লেআউট */
         .casino-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -111,11 +146,150 @@
             text-overflow: ellipsis;
         }
 
+        /* নিচের ফিক্সড নেভিগেশন বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #1e293b;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            border-top: 1px solid #334155;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #94a3b8;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .nav-item i {
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .nav-item.active {
+            color: #f59e0b;
+        }
+
+        .nav-action-btn {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 10px;
+            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4);
+            border: 2px solid #fff;
+            margin-top: -15px;
+            text-align: center;
+        }
+
+        /* পপ-আপ মোডাল ডিজাইন */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.75);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            border: 1px solid #475569;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 12px;
+            color: #f8fafc;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .notice-box {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px dashed #f59e0b;
+            margin-bottom: 15px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .notice-box span {
+            color: #f59e0b;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 5px;
+        }
+
+        .form-group select, .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #475569;
+            background: #0f172a;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .withdraw-submit { background: #ef4444; }
+        .close-modal { background: #64748b; margin-top: 5px; }
+
         /* ডানপাশের ফ্লোটিং বাটন */
         .floating-widgets {
             position: fixed;
             right: 15px;
-            bottom: 30px;
+            bottom: 80px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -123,45 +297,37 @@
         }
 
         .float-btn {
-            width: 55px;
-            height: 55px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             text-decoration: none;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 3px solid #ffaa00;
+            border: 2px solid #ffaa00;
         }
 
-        .share-btn {
-            background: #ffcc00;
-            color: #1a2332;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .share-btn i {
-            font-size: 14px;
-            margin-bottom: 2px;
-        }
-
-        .whatsapp-btn {
-            background: #25d366;
-            font-size: 24px;
-        }
-
-        .telegram-btn {
-            background: #0088cc;
-            font-size: 22px;
-        }
+        .whatsapp-btn { background: #25d366; font-size: 20px; }
+        .telegram-btn { background: #0088cc; font-size: 18px; }
     </style>
 </head>
 <body>
 
     <div class="casino-container">
+        <!-- ব্যালেন্স, ডিপোজিট ও উইথড্র বার -->
+        <div class="wallet-bar">
+            <div>
+                <span style="font-size: 12px; color: #94a3b8;">Balance:</span>
+                <span class="balance">৳ 0.00</span>
+            </div>
+            <div class="action-btns">
+                <button class="mini-btn deposit-mini" onclick="openDepositModal()">Deposit</button>
+                <button class="mini-btn withdraw-mini" onclick="openWithdrawModal()">Withdraw</button>
+            </div>
+        </div>
+
         <!-- ব্যানার বা হেডার -->
         <div class="casino-header">
             <div class="header-title">
@@ -170,50 +336,39 @@
             </div>
         </div>
 
-        <!-- ৬টি গেমের লিস্ট (লাইভ লিঙ্কসহ) -->
+        <!-- ৬টি গেমের লিস্ট -->
         <div class="casino-grid">
-            <!-- Crazy Time -->
-            <a href="#" class="casino-card" target="_blank">
+            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Crazy Time</p>
             </a>
-
-            <!-- Ice Fishing -->
-            <a href="#" class="casino-card" target="_blank">
+            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Ice Fishing</p>
             </a>
-
-            <!-- Bac Bo -->
-            <a href="#" class="casino-card" target="_blank">
+            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Bac Bo</p>
             </a>
-
-            <!-- Funky Time -->
-            <a href="#" class="casino-card" target="_blank">
+            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Funky Time</p>
             </a>
-
-            <!-- Mega Wheel -->
-            <a href="#" class="casino-card" target="_blank">
+            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
                 <p>Mega Wheel</p>
             </a>
-
-            <!-- Auto-Roulette -->
-            <a href="#" class="casino-card" target="_blank">
+            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300');">
                     <i class="fa-regular fa-heart fav-icon"></i>
                 </div>
@@ -222,12 +377,82 @@
         </div>
     </div>
 
-    <!-- ফ্লোটিং বাটন (WhatsApp ও Telegram) -->
-    <div class="floating-widgets">
-        <a href="#" class="float-btn share-btn">
-            <i class="fa-solid fa-share"></i>
-            <span>INDIQUE</span>
+    <!-- ডিপোজিট ফর্ম পপ-আপ -->
+    <div class="modal" id="depositModal">
+        <div class="modal-content">
+            <h3>Deposit Money</h3>
+            <div class="notice-box">
+                Bkash / Nagad Personal Number:<br>
+                <span>01906531772</span><br>
+                <small style="color: #94a3b8;">(প্রথমে সেন্ড মানি করুন)</small>
+            </div>
+            <div class="form-group">
+                <label>Payment Method</label>
+                <select id="depMethod">
+                    <option value="Bkash">Bkash</option>
+                    <option value="Nagad">Nagad</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Amount (BDT)</label>
+                <input type="number" id="depAmount" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label>Sender Number / TrxID</label>
+                <input type="text" id="depTrx" placeholder="Enter TrxID or Number">
+            </div>
+            <button class="submit-btn" onclick="sendDepositWhatsApp()">Confirm Deposit</button>
+            <button class="submit-btn close-modal" onclick="closeModal('depositModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- উইথড্র ফর্ম পপ-আপ -->
+    <div class="modal" id="withdrawModal">
+        <div class="modal-content">
+            <h3>Withdraw Money</h3>
+            <div class="notice-box" style="border-color: #ef4444;">
+                উইথড্র রিকোয়েস্ট দেওয়ার পর <br><span>১০ মিনিট থেকে ২৪ ঘণ্টার মধ্যে</span> পেমেন্ট পেয়ে যাবেন।
+            </div>
+            <div class="form-group">
+                <label>Withdraw Method</label>
+                <select id="witMethod">
+                    <option value="Bkash">Bkash</option>
+                    <option value="Nagad">Nagad</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Amount (BDT)</label>
+                <input type="number" id="witAmount" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label>Your Personal Account Number</label>
+                <input type="text" id="witNumber" placeholder="Enter your Bkash/Nagad number">
+            </div>
+            <button class="submit-btn withdraw-submit" onclick="sendWithdrawWhatsApp()">Submit Withdraw</button>
+            <button class="submit-btn close-modal" onclick="closeModal('withdrawModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- নিচের ফিক্সড নেভিগেশন বার -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
         </a>
+        <a class="nav-item" onclick="openDepositModal()">
+            <div class="nav-action-btn">Deposit</div>
+        </a>
+        <a class="nav-item" onclick="openWithdrawModal()">
+            <div class="nav-action-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);">Withdraw</div>
+        </a>
+        <a href="https://wa.me/8801906531772" target="_blank" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Account</span>
+        </a>
+    </div>
+
+    <!-- ফ্লোটিং হোয়াটসঅ্যাপ ও টেলিগ্রাম বাটন -->
+    <div class="floating-widgets">
         <a href="https://wa.me/8801906531772" target="_blank" class="float-btn whatsapp-btn">
             <i class="fa-brands fa-whatsapp"></i>
         </a>
@@ -236,5 +461,48 @@
         </a>
     </div>
 
+    <script>
+        function openDepositModal() {
+            document.getElementById('depositModal').style.display = 'flex';
+        }
+        function openWithdrawModal() {
+            document.getElementById('withdrawModal').style.display = 'flex';
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function sendDepositWhatsApp() {
+            let method = document.getElementById('depMethod').value;
+            let amount = document.getElementById('depAmount').value;
+            let trx = document.getElementById('depTrx').value;
+
+            if(!amount || !trx) {
+                alert('দয়া করে টাকার পরিমাণ এবং ট্রানজেকশন আইডি দিন!');
+                return;
+            }
+
+            let message = `New Deposit Request!%0AMethod: ${method}%0AAmount: ${amount} BDT%0ATrxID: ${trx}`;
+            window.open(`https://wa.me/8801906531772?text=${message}`, '_blank');
+            closeModal('depositModal');
+        }
+
+        function sendWithdrawWhatsApp() {
+            let method = document.getElementById('witMethod').value;
+            let amount = document.getElementById('witAmount').value;
+            let number = document.getElementById('witNumber').value;
+
+            if(!amount || !number) {
+                alert('দয়া করে টাকার পরিমাণ এবং আপনার অ্যাকাউন্ট নম্বর দিন!');
+                return;
+            }
+
+            let message = `New Withdraw Request!%0AMethod: ${method}%0AAmount: ${amount} BDT%0AReceive Number: ${number}`;
+            window.open(`https://wa.me/8801906531772?text=${message}`, '_blank');
+            closeModal('withdrawModal');
+        }
+    </script>
+
 </body>
-</html>
+    </html>
+                
