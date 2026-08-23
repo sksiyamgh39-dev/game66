@@ -5,192 +5,198 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aviator - Spribe Style</title>
     <style>
-        body { margin: 0; background: #0f141c; font-family: Arial, sans-serif; color: #fff; text-align: center; }
-        .header { background: #18202c; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #293548; }
-        .back-btn { background: #e53935; color: #fff; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #0e131b; color: #fff; text-align: center; }
         
-        /* History Bar */
-        .history-bar { background: #131922; padding: 6px; display: flex; gap: 6px; overflow-x: auto; white-space: nowrap; justify-content: center; border-bottom: 1px solid #222; }
-        .hist-item { background: #1c2634; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; color: #4cd137; }
+        .header { background: #171f2c; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #232e3e; }
+        .back-btn { background: #e53935; color: #fff; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .bal-box { background: #000; padding: 4px 10px; border-radius: 15px; border: 1px solid #333; color: #2ecc71; font-weight: bold; }
+
+        .history-bar { background: #121822; padding: 8px; display: flex; gap: 8px; overflow-x: auto; border-bottom: 1px solid #232e3e; }
+        .hist-item { background: #1c2636; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; color: #3498db; }
+
+        .game-container { position: relative; width: 92%; max-width: 420px; height: 230px; margin: 15px auto; background: #000; border-radius: 10px; border: 1px solid #232e3e; overflow: hidden; }
+        canvas { width: 100%; height: 100%; display: block; }
         
-        /* Game Screen */
-        .game-box { margin: 10px auto; width: 94%; max-width: 450px; background: #000; height: 210px; border-radius: 8px; border: 1px solid #293548; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .multiplier { font-size: 42px; font-weight: bold; color: #fff; z-index: 2; }
-        .plane { font-size: 45px; position: absolute; transition: 0.1s; z-index: 1; }
+        .multiplier-text { position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); font-size: 45px; font-weight: 900; color: #fff; z-index: 10; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+
+        .bet-box { width: 92%; max-width: 420px; margin: 0 auto; background: #171f2c; padding: 15px; border-radius: 10px; border: 1px solid #232e3e; }
+        .ctrl-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .amt-btn { background: #232e3e; color: #fff; border: none; width: 35px; height: 35px; border-radius: 6px; font-size: 20px; font-weight: bold; cursor: pointer; }
+        .amt-input { width: 80px; height: 35px; background: #0e131b; border: 1px solid #333; color: #fff; text-align: center; font-size: 16px; font-weight: bold; border-radius: 6px; }
         
-        /* Bet Panel Container */
-        .bet-container { width: 94%; max-width: 450px; margin: 0 auto 15px auto; display: flex; flex-direction: column; gap: 10px; }
-        .bet-box { background: #18202c; padding: 12px; border-radius: 8px; border: 1px solid #293548; display: flex; flex-direction: column; gap: 8px; }
-        
-        .bet-row-top { display: flex; justify-content: space-between; align-items: center; }
-        .amount-ctrl { display: flex; align-items: center; background: #0f141c; border-radius: 6px; border: 1px solid #293548; overflow: hidden; }
-        .amount-ctrl button { background: #222f3e; color: #fff; border: none; padding: 6px 12px; font-size: 16px; cursor: pointer; }
-        .amount-ctrl input { background: transparent; border: none; color: #fff; width: 60px; text-align: center; font-size: 16px; font-weight: bold; outline: none; }
-        
-        .preset-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
-        .preset-btn { background: #222f3e; border: none; color: #aaa; padding: 4px; border-radius: 4px; font-size: 11px; cursor: pointer; }
-        
-        /* Action Button */
-        .action-btn { width: 100%; padding: 12px; font-size: 18px; font-weight: bold; border-radius: 6px; border: none; cursor: pointer; text-transform: uppercase; }
-        .btn-bet { background: #2ecc71; color: #fff; }
-        .btn-cashout { background: #f39c12; color: #fff; display: none; }
+        .preset-btns { display: flex; gap: 5px; }
+        .p-btn { background: #232e3e; border: none; color: #aaa; padding: 8px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+
+        .action-btn { width: 100%; padding: 14px; font-size: 20px; font-weight: bold; border-radius: 8px; border: none; cursor: pointer; text-transform: uppercase; transition: 0.2s; }
+        .btn-bet { background: #2ecc71; color: #fff; box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3); }
+        .btn-cashout { background: #f1c40f; color: #000; box-shadow: 0 4px 12px rgba(241, 196, 15, 0.4); }
     </style>
 </head>
 <body>
 
     <div class="header">
         <button class="back-btn" onclick="history.back()">⬅ Back</button>
-        <span style="color:#e53935; font-weight:bold; font-size:18px;">Aviator</span>
-        <div><b>BDT <span id="bal">500.00</span></b></div>
+        <span style="color:#e53935; font-weight:bold; font-size:20px;">Aviator</span>
+        <div class="bal-box">BDT <span id="bal">500.00</span></div>
     </div>
 
-    <!-- History Bar -->
-    <div class="history-bar" id="historyBar">
-        <span class="hist-item">1.45x</span>
-        <span class="hist-item">2.10x</span>
-        <span class="hist-item">1.02x</span>
-        <span class="hist-item">5.30x</span>
+    <div class="history-bar" id="histBar">
+        <span class="hist-item" style="color:#9b59b6;">1.20x</span>
+        <span class="hist-item">2.45x</span>
+        <span class="hist-item" style="color:#e74c3c;">1.05x</span>
+        <span class="hist-item">5.10x</span>
     </div>
 
-    <!-- Game Screen -->
-    <div class="game-box">
-        <div class="plane" id="plane" style="left: 20px; bottom: 20px;">✈️</div>
-        <div class="multiplier" id="mult">1.00x</div>
+    <div class="game-container">
+        <div class="multiplier-text" id="multText">1.00x</div>
+        <canvas id="gameCanvas"></canvas>
     </div>
 
-    <!-- Bet Panels -->
-    <div class="bet-container">
-        <!-- Panel 1 -->
-        <div class="bet-box">
-            <div class="bet-row-top">
-                <div class="amount-ctrl">
-                    <button onclick="changeAmt(-10)">-</button>
-                    <input type="number" id="betAmt1" value="10">
-                    <button onclick="changeAmt(10)">+</button>
-                </div>
-                <div class="preset-grid">
-                    <button class="preset-btn" onclick="setAmt(50)">50</button>
-                    <button class="preset-btn" onclick="setAmt(100)">100</button>
-                    <button class="preset-btn" onclick="setAmt(500)">500</button>
-                    <button class="preset-btn" onclick="setAmt(1000)">1000</button>
-                </div>
+    <div class="bet-box">
+        <div class="ctrl-row">
+            <div style="display:flex; align-items:center; gap:5px;">
+                <button class="amt-btn" onclick="addAmt(-10)">-</button>
+                <input type="number" id="betAmt" class="amt-input" value="10">
+                <button class="amt-btn" onclick="addAmt(10)">+</button>
             </div>
-            <button class="action-btn btn-bet" id="mainBtn1" onclick="toggleBet()">BET ৳10</button>
+            <div class="preset-btns">
+                <button class="p-btn" onclick="setAmt(50)">50</button>
+                <button class="p-btn" onclick="setAmt(100)">100</button>
+                <button class="p-btn" onclick="setAmt(500)">500</button>
+            </div>
         </div>
+        <button class="action-btn btn-bet" id="mainBtn" onclick="handleAction()">BET ৳10</button>
     </div>
 
     <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+
         let balance = 500.00;
-        let isPlaying = false;
-        let currentMultiplier = 1.00;
-        let gameTimer = null;
-        let hasBetted = false;
-        let cashedOut = false;
+        let betAmount = 10;
+        let isBetPlaced = false;
+        let isCashedOut = false;
+        let isRunning = false;
+
+        let multiplier = 1.00;
+        let crashPoint = 1.00;
+        let animationFrame;
+        let planeX = 0;
+        let planeY = 0;
+
+        function addAmt(val) {
+            let elem = document.getElementById('betAmt');
+            let curr = parseInt(elem.value) || 0;
+            if(curr + val >= 10) elem.value = curr + val;
+            updateBtn();
+        }
 
         function setAmt(val) {
-            document.getElementById('betAmt1').value = val;
-            updateBtnText();
+            document.getElementById('betAmt').value = val;
+            updateBtn();
         }
 
-        function changeAmt(val) {
-            let input = document.getElementById('betAmt1');
-            let current = parseInt(input.value) || 0;
-            let res = current + val;
-            if(res >= 10) input.value = res;
-            updateBtnText();
-        }
-
-        function updateBtnText() {
-            let amt = document.getElementById('betAmt1').value;
-            if(!hasBetted) {
-                document.getElementById('mainBtn1').innerText = `BET ৳${amt}`;
+        function updateBtn() {
+            if(!isBetPlaced) {
+                betAmount = parseFloat(document.getElementById('betAmt').value);
+                document.getElementById('mainBtn').innerText = `BET ৳${betAmount}`;
             }
         }
 
-        function toggleBet() {
-            let amt = parseFloat(document.getElementById('betAmt1').value);
-            if(!hasBetted) {
-                if(balance < amt) {
-                    alert('Insufficient balance!');
+        function handleAction() {
+            let btn = document.getElementById('mainBtn');
+            betAmount = parseFloat(document.getElementById('betAmt').value);
+
+            if(!isBetPlaced) {
+                if(balance < betAmount) {
+                    alert('পর্যাপ্ত ব্যালেন্স নেই!');
                     return;
                 }
-                balance -= amt;
+                balance -= betAmount;
                 document.getElementById('bal').innerText = balance.toFixed(2);
-                hasBetted = true;
-                cashedOut = false;
+                isBetPlaced = true;
+                isCashedOut = false;
                 
-                let btn = document.getElementById('mainBtn1');
                 btn.className = 'action-btn btn-cashout';
-                btn.innerText = `CASH OUT ৳${amt}`;
+                btn.innerText = `CASH OUT ৳${(betAmount * multiplier).toFixed(2)}`;
+            } else if(isRunning && !isCashedOut) {
+                isCashedOut = true;
+                let win = betAmount * multiplier;
+                balance += win;
+                document.getElementById('bal').innerText = balance.toFixed(2);
+                
+                btn.className = 'action-btn btn-bet';
+                btn.innerText = `WON ৳${win.toFixed(2)}`;
+            }
+        }
 
-                if(!isPlaying) {
-                    startRound();
-                }
-            } else {
-                // Cash Out
-                if(isPlaying && !cashedOut) {
-                    cashedOut = true;
-                    let winAmount = amt * currentMultiplier;
-                    balance += winAmount;
-                    document.getElementById('bal').innerText = balance.toFixed(2);
-                    
-                    let btn = document.getElementById('mainBtn1');
-                    btn.className = 'action-btn btn-bet';
-                    btn.innerText = `WON ৳${winAmount.toFixed(2)}`;
-                    setTimeout(() => {
-                        hasBetted = false;
-                        updateBtnText();
-                    }, 2000);
-                }
+        function drawGraph() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw Line Curve
+            if(isRunning) {
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height);
+                ctx.quadraticCurveTo(planeX / 2, canvas.height, planeX, planeY);
+                ctx.strokeStyle = '#e53935';
+                ctx.lineWidth = 4;
+                ctx.stroke();
+
+                // Draw Plane
+                ctx.font = '28px Arial';
+                ctx.fillText('✈️', planeX - 15, planeY + 10);
             }
         }
 
         function startRound() {
-            isPlaying = true;
-            currentMultiplier = 1.00;
-            let multElem = document.getElementById('mult');
-            let plane = document.getElementById('plane');
-            let crashPoint = (Math.random() * 4 + 1.1).toFixed(2); // Random crash between 1.10x and 5.00x
+            isRunning = true;
+            multiplier = 1.00;
+            crashPoint = (Math.random() * 3 + 1.1).toFixed(2);
+            
+            planeX = 20;
+            planeY = canvas.height - 20;
+            
+            let btn = document.getElementById('mainBtn');
+            document.getElementById('multText').style.color = '#fff';
 
-            plane.style.left = '20px';
-            plane.style.bottom = '20px';
+            let timer = setInterval(() => {
+                multiplier += 0.02;
+                document.getElementById('multText').innerText = multiplier.toFixed(2) + 'x';
 
-            gameTimer = setInterval(() => {
-                currentMultiplier += 0.03;
-                multElem.innerText = currentMultiplier.toFixed(2) + 'x';
-                multElem.style.color = '#fff';
-                
-                // Move plane slightly
-                let leftPos = Math.min(250, 20 + (currentMultiplier * 40));
-                let bottomPos = Math.min(140, 20 + (currentMultiplier * 25));
-                plane.style.left = leftPos + 'px';
-                plane.style.bottom = bottomPos + 'px';
+                planeX = Math.min(canvas.width - 40, planeX + 2);
+                planeY = Math.max(30, canvas.height - (multiplier * 35));
 
-                if(currentMultiplier >= crashPoint) {
-                    clearInterval(gameTimer);
-                    multElem.innerText = 'FLEW AWAY!';
-                    multElem.style.color = '#e53935';
-                    
-                    // If user placed a bet but didn't cash out
-                    if(hasBetted && !cashedOut) {
-                        let btn = document.getElementById('mainBtn1');
+                if(isBetPlaced && !isCashedOut) {
+                    btn.innerText = `CASH OUT ৳${(betAmount * multiplier).toFixed(2)}`;
+                }
+
+                drawGraph();
+
+                if(multiplier >= crashPoint) {
+                    clearInterval(timer);
+                    isRunning = false;
+                    document.getElementById('multText').innerText = 'FLEW AWAY!';
+                    document.getElementById('multText').style.color = '#e53935';
+
+                    if(isBetPlaced && !isCashedOut) {
                         btn.className = 'action-btn btn-bet';
-                        hasBetted = false;
-                        updateBtnText();
+                        isBetPlaced = false;
+                        updateBtn();
                     }
 
-                    // Reset after 3 seconds
                     setTimeout(() => {
-                        isPlaying = false;
-                        multElem.innerText = '1.00x';
-                        startRound(); // Auto start next round
-                    }, 3000);
+                        isBetPlaced = false;
+                        updateBtn();
+                        startRound();
+                    }, 2500);
                 }
-            }, 100);
+            }, 80);
         }
 
-        // Auto start first round on load
-        setTimeout(startRound, 1500);
+        setTimeout(startRound, 1000);
     </script>
 </body>
 </html>
