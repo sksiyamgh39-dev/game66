@@ -1,257 +1,102 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game66 Demo</title>
+<section class="games">
 
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Arial,sans-serif;
-  background:#063f43;
-  color:white;
-  padding-bottom:80px;
-}
-.header{
-  height:72px;
-  background:#07575a;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 18px;
-  position:sticky;
-  top:0;
-  z-index:10;
-}
-.logo{
-  font-size:28px;
-  font-weight:bold;
-  color:#ff9b38;
-}
-.logo span{color:#fff}
-.menu{font-size:30px}
-.profile{
-  background:#073b45;
-  padding:9px 14px;
-  border-radius:18px;
-  color:#20ffd0;
-  font-weight:bold;
-}
-.container{padding:14px}
-.banner{
-  height:180px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#8b1600,#ff9d00,#7b0500);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  margin-bottom:16px;
-  box-shadow:0 5px 20px #001f20;
-}
-.banner h1{
-  font-size:32px;
-  color:#ffd43b;
-  text-shadow:2px 3px #6b1600;
-}
-.banner p{font-size:16px;margin-top:8px}
+  <div class="game">
+    <div class="game-img game1">
+      <span>👑</span>
+      <b>SUPER<br>ACE</b>
+    </div>
+    <div class="game-name">Super Ace Demo</div>
+    <button class="play" onclick="playGame('Super Ace Demo')">PLAY</button>
+  </div>
 
-.buttons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-.big-btn{
-  background:#06434c;
-  border:1px solid #087b80;
-  border-radius:18px;
-  padding:18px 8px;
-  text-align:center;
-  font-size:18px;
-  font-weight:bold;
-}
-.categories{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  margin:14px 0 25px;
-}
-.cat{
-  background:#075158;
-  padding:16px 4px;
-  border-radius:14px;
-  text-align:center;
-  font-weight:bold;
-}
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:12px;
-}
-.section-title h2{color:#20ffd0}
-.see{color:#ffc928}
+  <div class="game">
+    <div class="game-img game2">
+      <span>7️⃣</span>
+      <b>FIERY<br>SEVENS</b>
+    </div>
+    <div class="game-name">Fiery Sevens Demo</div>
+    <button class="play" onclick="playGame('Fiery Sevens Demo')">PLAY</button>
+  </div>
 
-.games{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-.game{
-  background:#06474c;
-  border-radius:17px;
-  overflow:hidden;
-  box-shadow:0 5px 15px #002b2c;
-}
-.game-img{
-  height:190px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  font-size:28px;
-  font-weight:bold;
-}
-.g1{background:linear-gradient(135deg,#70d800,#f4f000)}
-.g2{background:linear-gradient(135deg,#3d002f,#e91e63)}
-.g3{background:linear-gradient(135deg,#111,#777)}
-.g4{background:linear-gradient(135deg,#470008,#e50035)}
-.g5{background:linear-gradient(135deg,#703e12,#f5bd62)}
-.g6{background:linear-gradient(135deg,#151515,#7330b8)}
+  <div class="game">
+    <div class="game-img game3">
+      <span>🚀</span>
+      <b>SPACE<br>RUN</b>
+    </div>
+    <div class="game-name">Space Run</div>
+    <button class="play" onclick="playGame('Space Run')">PLAY</button>
+  </div>
 
-.game-name{
-  padding:12px;
-  font-weight:bold;
-}
-.play{
-  margin:0 12px 12px;
-  width:calc(100% - 24px);
-  padding:10px;
-  border:0;
-  border-radius:10px;
-  background:#16e8b5;
-  color:#003d3d;
-  font-weight:bold;
-}
+  <div class="game">
+    <div class="game-img game4">
+      <span>🏎️</span>
+      <b>SPEED<br>RACE</b>
+    </div>
+    <div class="game-name">Speed Race</div>
+    <button class="play" onclick="playGame('Speed Race')">PLAY</button>
+  </div>
 
-.bottom{
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  height:70px;
-  background:#075158;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  border-top:1px solid #15999b;
-  z-index:20;
-}
-.nav{
+  <div class="game">
+    <div class="game-img game5">
+      <span>🏝️</span>
+      <b>JUNGLE<br>QUEST</b>
+    </div>
+    <div class="game-name">Jungle Quest</div>
+    <button class="play" onclick="playGame('Jungle Quest')">PLAY</button>
+  </div>
+
+  <div class="game">
+    <div class="game-img game6">
+      <span>🧙</span>
+      <b>MAGIC<br>WORLD</b>
+    </div>
+    <div class="game-name">Magic World</div>
+    <button class="play" onclick="playGame('Magic World')">PLAY</button>
+  </div>
+
+</section>.game-img{
+  height:210px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  font-size:13px;
-  color:#c9ffff;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
 }
-.nav.active{color:#ffd21c}
-.nav b{font-size:24px;margin-bottom:3px}
 
-@media(min-width:700px){
-  .container{max-width:650px;margin:auto}
-  .games{grid-template-columns:repeat(3,1fr)}
-  .game-img{height:210px}
+.game-img span{
+  font-size:55px;
+  margin-bottom:8px;
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.4));
 }
-</style>
-</head>
 
-<body>
-
-<header class="header">
-  <div class="menu">☰</div>
-  <div class="logo">CK44<span>|Game</span></div>
-  <div class="profile">G66 👤</div>
-</header>
-
-<main class="container">
-
-  <section class="banner">
-    <div>
-      <h1>GAME66 DEMO</h1>
-      <p>🎮 Play Free • Have Fun • No Money</p>
-    </div>
-  </section>
-
-  <section class="buttons">
-    <div class="big-btn">🎮 Play Games</div>
-    <div class="big-btn">🎁 Rewards</div>
-  </section>
-
-  <section class="categories">
-    <div class="cat">🔥 HOT</div>
-    <div class="cat">⭐ FAVORITE</div>
-    <div class="cat">🎰 SLOTS</div>
-  </section>
-
-  <div class="section-title">
-    <h2>HOT GAMES</h2>
-    <span class="see">See All ›</span>
-  </div>
-
-  <section class="games">
-
-    <div class="game">
-      <div class="game-img g1">👑<br>SUPER<br>ACE</div>
-      <div class="game-name">Super Ace</div>
-      <button class="play" onclick="playGame('Super Ace')">PLAY</button>
-    </div>
-
-    <div class="game">
-      <div class="game-img g2">7️⃣<br>FIERY<br>SEVENS</div>
-      <div class="game-name">Fiery Sevens</div>
-      <button class="play" onclick="playGame('Fiery Sevens')">PLAY</button>
-    </div>
-
-    <div class="game">
-      <div class="game-img g3">✈️<br>FLY X</div>
-      <div class="game-name">Fly X Demo</div>
-      <button class="play" onclick="playGame('Fly X Demo')">PLAY</button>
-    </div>
-
-    <div class="game">
-      <div class="game-img g4">🚀<br>AVIATOR<br>DEMO</div>
-      <div class="game-name">Aviator Demo</div>
-      <button class="play" onclick="playGame('Aviator Demo')">PLAY</button>
-    </div>
-
-    <div class="game">
-      <div class="game-img g5">🤠<br>WILD<br>SHOWDOWN</div>
-      <div class="game-name">Wild Showdown</div>
-      <button class="play" onclick="playGame('Wild Showdown')">PLAY</button>
-    </div>
-
-    <div class="game">
-      <div class="game-img g6">💪<br>MIGHTY<br>DEMO</div>
-      <div class="game-name">Mighty Demo</div>
-      <button class="play" onclick="playGame('Mighty Demo')">PLAY</button>
-    </div>
-
-  </section>
-</main>
-
-<nav class="bottom">
-  <div class="nav active"><b>⌂</b>Home</div>
-  <div class="nav"><b>🎁</b>Rewards</div>
-  <div class="nav"><b>🎮</b>Games</div>
-  <div class="nav"><b>👤</b>Member</div>
-</nav>
-
-<script>
-function playGame(name){
-  alert(name + " চালু হবে — এটি একটি Free Demo Game.");
+.game-img b{
+  font-size:27px;
+  line-height:1.05;
+  text-shadow:2px 3px 5px #000;
 }
-</script>
 
-</body>
-          </html>
+.game1{
+  background:linear-gradient(145deg,#79e600,#d8f800,#35a800);
+}
+
+.game2{
+  background:linear-gradient(145deg,#4b063e,#df1767,#ff6b35);
+}
+
+.game3{
+  background:linear-gradient(145deg,#071b5c,#2875ff,#8c35ff);
+}
+
+.game4{
+  background:linear-gradient(145deg,#111,#e51c23,#ff9d00);
+}
+
+.game5{
+  background:linear-gradient(145deg,#064d35,#18a558,#b5e329);
+}
+
+.game6{
+  background:linear-gradient(145deg,#210052,#7437d8,#e23cff);
+}
