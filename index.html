@@ -182,7 +182,7 @@
             cursor: pointer;
         }
 
-        /* গেম গ্রিড স্টাইল */
+        /* স্ক্রিনশটের মতো আকর্ষণীয় গেম গ্রিড স্টাইল */
         .games-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -190,34 +190,68 @@
             padding: 0 15px 15px 15px;
         }
         .game-card {
-            background: #132b28;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #1a3c37, #0f2522);
+            border-radius: 10px;
             overflow: hidden;
-            border: 1px solid #1f423e;
+            border: 1px solid #234e4a;
             text-align: center;
             cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .game-card:active {
+            transform: scale(0.97);
         }
         .game-banner {
             width: 100%;
-            height: 95px;
-            background: linear-gradient(135deg, #1f4d47, #0d1f1d);
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 8px;
+            text-align: center;
+            position: relative;
+        }
+        /* বিভিন্ন গেমের জন্য আলাদা আকর্ষণীয় ব্যাকগ্রাউন্ড কালার */
+        .game-1 { background: linear-gradient(135deg, #d4ac0d, #b7950b); color: #000; }
+        .game-2 { background: linear-gradient(135deg, #78281f, #512e5f); }
+        .game-3 { background: linear-gradient(135deg, #4a235a, #1b4f72); }
+        .game-4 { background: linear-gradient(135deg, #117a65, #145a32); }
+        .game-5 { background: linear-gradient(135deg, #b9770e, #784212); }
+        .game-6 { background: linear-gradient(135deg, #2e4053, #154360); }
+
+        .fav-icon {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(0, 0, 0, 0.4);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #e5c158;
-            font-weight: bold;
-            font-size: 13px;
-            padding: 5px;
-            text-align: center;
-            border-bottom: 1px solid #1f423e;
-        }
-        .game-card span {
-            display: block;
-            padding: 6px;
             font-size: 11px;
+            color: #fff;
+        }
+        .game-footer-info {
+            padding: 6px;
+            background: #0d1f1d;
+            border-top: 1px solid #1f423e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
             color: #f1c40f;
             font-weight: bold;
-            background: #0d1f1d;
+        }
+        .game-footer-info span:last-child {
+            color: #2ecc71;
         }
 
         /* গেম প্লে স্ক্রিন */
@@ -510,29 +544,71 @@
         </div>
 
         <div class="games-grid">
+            <!-- 1. Super Ace -->
             <div class="game-card" onclick="openGame('Super Ace')">
-                <div class="game-banner">👑 Super Ace</div>
-                <span>Super Ace</span>
+                <div class="game-banner game-1">
+                    <div class="fav-icon">🤍</div>
+                    👑 Super Ace
+                </div>
+                <div class="game-footer-info">
+                    <span>Super Ace</span>
+                    <span>JILI</span>
+                </div>
             </div>
-            <div class="game-card" onclick="openGame('Fiery Sevens')">
-                <div class="game-banner">🔥 Fiery Sevens</div>
-                <span>Fiery Sevens</span>
-            </div>
-            <div class="game-card" onclick="openGame('FlyX')">
-                <div class="game-banner">🚀 FlyX</div>
-                <span>FlyX</span>
-            </div>
-            <div class="game-card" onclick="openGame('Aviator')">
-                <div class="game-banner">✈️ Aviator</div>
-                <span>Aviator</span>
-            </div>
+            <!-- 2. Wild Bounty -->
             <div class="game-card" onclick="openGame('Wild Bounty')">
-                <div class="game-banner">🤠 Wild Bounty</div>
-                <span>Wild Bounty</span>
+                <div class="game-banner game-2">
+                    <div class="fav-icon">🤍</div>
+                    🤠 Wild Bounty
+                </div>
+                <div class="game-footer-info">
+                    <span>Wild Bounty</span>
+                    <span>PG</span>
+                </div>
             </div>
-            <div class="game-card" onclick="openGame('Mighty Train')">
-                <div class="game-banner">🚂 Mighty Train</div>
-                <span>Mighty Train</span>
+            <!-- 3. Mighty Mania -->
+            <div class="game-card" onclick="openGame('Mighty Mania')">
+                <div class="game-banner game-3">
+                    <div class="fav-icon">🤍</div>
+                    💪 Mighty Mania
+                </div>
+                <div class="game-footer-info">
+                    <span>Mighty Mania</span>
+                    <span>PG</span>
+                </div>
+            </div>
+            <!-- 4. Aviator -->
+            <div class="game-card" onclick="openGame('Aviator')">
+                <div class="game-banner game-4">
+                    <div class="fav-icon" style="color: #f1c40f;">💛</div>
+                    ✈️ Aviator
+                </div>
+                <div class="game-footer-info">
+                    <span>Aviator</span>
+                    <span>SPRIBE</span>
+                </div>
+            </div>
+            <!-- 5. FlyX -->
+            <div class="game-card" onclick="openGame('FlyX')">
+                <div class="game-banner game-5">
+                    <div class="fav-icon">🤍</div>
+                    🚀 FlyX
+                </div>
+                <div class="game-footer-info">
+                    <span>FlyX</span>
+                    <span>Microgaming</span>
+                </div>
+            </div>
+            <!-- 6. Super Elements -->
+            <div class="game-card" onclick="openGame('Super Elements')">
+                <div class="game-banner game-6">
+                    <div class="fav-icon">🤍</div>
+                    🔥 Super Elements
+                </div>
+                <div class="game-footer-info">
+                    <span>Super Elements</span>
+                    <span>FC</span>
+                </div>
             </div>
         </div>
     </div>
@@ -582,69 +658,4 @@
 
                 <div class="form-options">
                     <label>
-                        <input type="checkbox" checked> I am over 18 years of age and have read and accepted Terms & Conditions, Privacy Policy & Betting Rules.
-                    </label>
-                    <label>
-                        <input type="checkbox"> I would like to receive details of special offers, free bets and other promotions.
-                    </label>
-                </div>
-
-                <button class="submit-btn" onclick="completeAuth()">Register</button>
-
-                <div class="social-login">
-                    <div class="social-icons">
-                        <div class="social-btn" style="background: #3b5998;">f</div>
-                        <div class="social-btn" style="background: #db4437;">G</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 3. লগইন পেজ সেকশন -->
-    <div id="login-page" class="page-section">
-        <div class="back-header">
-            <button class="back-btn" onclick="showPage('home-page')">&lt;</button>
-        </div>
-        <div class="auth-box-container">
-            <div class="auth-brand">
-                <h1>CK44 <span style="color:#2ecc71">wintk</span></h1>
-            </div>
-            <div class="auth-card">
-                <div class="auth-title">Login</div>
-                <div class="auth-subtitle">No account yet? <span onclick="showPage('register-page')">Register</span></div>
-                
-                <div class="input-group">
-                    <span>📞</span>
-                    <input type="text" placeholder="Phone number">
-                </div>
-                <div class="input-group">
-                    <span>🔒</span>
-                    <input type="password" placeholder="Password">
-                </div>
-
-                <div class="form-options" style="display: flex; justify-content: space-between; align-items: center;">
-                    <label style="margin:0;">
-                        <input type="checkbox" checked> Remember
-                    </label>
-                    <a href="#" style="color: #e5c158; text-decoration: none;">Forgot password?</a>
-                </div>
-                <br>
-
-                <button class="submit-btn" onclick="completeAuth()">Login</button>
-
-                <div class="social-login">
-                    <p style="font-size: 12px; color: #aaa; margin-bottom: 5px;">Or Connect With</p>
-                    <div class="social-icons">
-                        <div class="social-btn" style="background: #3b5998;">f</div>
-                        <div class="social-btn" style="background: #db4437;">G</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- পপ-আপ অ্যানাউন্সমেন্ট মোডাল -->
-    <div id="announcement-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="modal-close" onclick="clo
+                        <input type="checkbox" checked> I am over 18 years of age and have read an
