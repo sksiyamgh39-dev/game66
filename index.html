@@ -3,522 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Casino & Banking System</title>
-    <!-- FontAwesome আইকনের সিডিএন -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>CK44 - Official Gaming Portal</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: sans-serif;
         }
-
         body {
-            background-color: #1a2332;
+            background-color: #0b1e1d;
             color: #ffffff;
-            padding: 10px;
-            padding-bottom: 70px;
+            padding: 15px;
         }
-
-        .casino-container {
-            max-width: 500px;
-            margin: 0 auto;
+        /* লোগো ও ব্র্যান্ডিং */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 20px;
         }
-
-        /* ব্যালেন্স ও উইথড্র বার */
-        .wallet-bar {
-            background: #243044;
-            padding: 10px 15px;
+        .brand-logo {
+            background: linear-gradient(135deg, #d4af37, #aa771c);
+            color: #0b1e1d;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 8px 20px;
             border-radius: 8px;
+            display: inline-block;
+            border: 2px solid #e5c158;
+            letter-spacing: 2px;
+        }
+        .brand-sub {
+            font-size: 22px;
+            font-weight: bold;
+            color: #e5c158;
+            margin-top: 5px;
+        }
+        .brand-sub span {
+            color: #2ecc71;
+        }
+
+        /* লগইন ফর্ম স্টাইল */
+        .auth-container {
+            background: rgba(15, 31, 30, 0.9);
+            border: 1px solid #1b3b38;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .auth-title {
+            text-align: center;
+            font-size: 20px;
+            color: #e5c158;
+            margin-bottom: 15px;
+        }
+        .input-group {
+            position: relative;
+            margin-bottom: 12px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            background: #0f1f1e;
+            border: 1px solid #1b3b38;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .input-group span {
+            position: absolute;
+            left: 12px;
+            top: 14px;
+            color: #2ecc71;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* সেন মানি ডিপোজিট সেকশন (স্ক্রিনশটের আদলে) */
+        .deposit-box {
+            background: #142c2a;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #234e4a;
+        }
+        .deposit-header {
+            background: #e74c3c;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .wallet-label {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .wallet-box {
+            background: #ffffff;
+            color: #000;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: bold;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
-            border: 1px solid #334155;
         }
-
-        .wallet-bar .balance {
-            font-size: 14px;
-            color: #22c55e;
-            font-weight: bold;
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
         }
-
-        .action-btns {
-            display: flex;
-            gap: 6px;
-        }
-
-        .mini-btn {
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .deposit-mini { background: #eab308; color: #000; }
-        .withdraw-mini { background: #ef4444; color: #fff; }
-
-        /* হেডার ডিজাইন */
-        .casino-header {
-            background: linear-gradient(90deg, #ff8c00, #ff5e00);
-            width: 75%;
-            border-radius: 8px 30px 30px 8px;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 10px rgba(255, 140, 0, 0.3);
-        }
-
-        .header-title {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header-title .rec {
-            font-size: 13px;
-            font-style: italic;
-            font-weight: bold;
+        .amount-btn {
+            background: #1b3b38;
+            border: 1px solid #e5c158;
             color: #fff;
+            padding: 8px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .trx-input {
+            width: 100%;
+            padding: 12px;
+            background: #0f1f1e;
+            border: 1px solid #e74c3c;
+            border-radius: 6px;
+            color: #fff;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .confirm-btn {
+            width: 100%;
+            padding: 12px;
+            background: #ffffff;
+            border: 1px solid #000;
+            border-radius: 6px;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            text-align: center;
+        }
+        .warning-text {
+            font-size: 12px;
+            color: #ff6b6b;
+            margin-top: 10px;
+            line-height: 1.4;
         }
 
-        .header-title .live {
+        /* গেম সেকশন গ্রিড */
+        .section-title {
             font-size: 18px;
-            font-weight: 900;
-            color: #e0f7ff;
+            color: #e5c158;
+            margin-bottom: 15px;
         }
-
-        /* গেম গ্রিড লেআউট */
-        .casino-grid {
+        .games-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
-
-        .casino-card {
-            background: #243044;
+        .game-card {
+            background: #1a3330;
             border-radius: 10px;
-            padding: 6px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            text-decoration: none;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .casino-card:active {
-            transform: scale(0.95);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 110px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            display: flex;
-            justify-content: flex-end;
-            padding: 6px;
-        }
-
-        .fav-icon {
-            color: white;
-            font-size: 14px;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 5px;
-            border-radius: 50%;
-            height: 25px;
-            width: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .casino-card p {
-            font-size: 12px;
-            color: #b0bec5;
-            font-weight: 500;
-            white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* নিচের ফিক্সড নেভিগেশন বার */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #1e293b;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            height: 60px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
-            z-index: 1000;
-            border-top: 1px solid #334155;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #94a3b8;
-            font-size: 11px;
-            cursor: pointer;
-        }
-
-        .nav-item i {
-            font-size: 18px;
-            margin-bottom: 3px;
-        }
-
-        .nav-item.active {
-            color: #f59e0b;
-        }
-
-        .nav-action-btn {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: bold;
-            font-size: 10px;
-            box-shadow: 0 4px 10px rgba(245, 158, 11, 0.4);
-            border: 2px solid #fff;
-            margin-top: -15px;
             text-align: center;
+            border: 1px solid #2a4d48;
         }
-
-        /* পপ-আপ মোডাল ডিজাইন */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .game-card img {
             width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.75);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 15px;
+            height: 90px;
+            object-fit: cover;
         }
-
-        .modal-content {
-            background: #1e293b;
-            padding: 20px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            border: 1px solid #475569;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-content h3 {
-            margin-bottom: 12px;
-            color: #f8fafc;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        .notice-box {
-            background: #0f172a;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px dashed #f59e0b;
-            margin-bottom: 15px;
-            font-size: 13px;
-            text-align: center;
-        }
-
-        .notice-box span {
-            color: #f59e0b;
-            font-weight: bold;
-            font-size: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-group label {
+        .game-card span {
             display: block;
+            padding: 5px;
             font-size: 12px;
-            color: #cbd5e1;
-            margin-bottom: 5px;
-        }
-
-        .form-group select, .form-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #475569;
-            background: #0f172a;
-            color: #fff;
-            font-size: 14px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background: #22c55e;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
+            background: #112624;
+            color: #d4af37;
             font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 14px;
         }
-
-        .withdraw-submit { background: #ef4444; }
-        .close-modal { background: #64748b; margin-top: 5px; }
-
-        /* ডানপাশের ফ্লোটিং বাটন */
-        .floating-widgets {
-            position: fixed;
-            right: 15px;
-            bottom: 80px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            z-index: 999;
-        }
-
-        .float-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 2px solid #ffaa00;
-        }
-
-        .whatsapp-btn { background: #25d366; font-size: 20px; }
-        .telegram-btn { background: #0088cc; font-size: 18px; }
     </style>
 </head>
 <body>
 
-    <div class="casino-container">
-        <!-- ব্যালেন্স, ডিপোজিট ও উইথড্র বার -->
-        <div class="wallet-bar">
-            <div>
-                <span style="font-size: 12px; color: #94a3b8;">Balance:</span>
-                <span class="balance">৳ 0.00</span>
-            </div>
-            <div class="action-btns">
-                <button class="mini-btn deposit-mini" onclick="openDepositModal()">Deposit</button>
-                <button class="mini-btn withdraw-mini" onclick="openWithdrawModal()">Withdraw</button>
-            </div>
+    <!-- ব্র্যান্ডিং লোগো -->
+    <div class="brand-header">
+        <div class="brand-logo">CK44</div>
+        <div class="brand-sub">CK44 <span>wintk</span></div>
+    </div>
+
+    <!-- লগইন সেকশন -->
+    <div class="auth-container">
+        <div class="auth-title">Login</div>
+        <div class="input-group">
+            <span>📞</span>
+            <input type="text" placeholder="Phone number">
+        </div>
+        <div class="input-group">
+            <span>🔒</span>
+            <input type="password" placeholder="Password">
+        </div>
+        <button class="submit-btn">Login</button>
+    </div>
+
+    <!-- সেন মানি ডিপোজিট সেকশন -->
+    <div class="deposit-box">
+        <div class="deposit-header">NAGAD Deposit</div>
+        <div class="wallet-label">Wallet No* (এই NAGAD নম্বরে সেন মানি করুন)</div>
+        <div class="wallet-box">
+            <span>01906531772</span>
+            <span>📋</span>
+        </div>
+        
+        <div class="amount-grid">
+            <div class="amount-btn">৳ 100</div>
+            <div class="amount-btn">৳ 300</div>
+            <div class="amount-btn">৳ 500</div>
+            <div class="amount-btn">৳ 1,000</div>
+            <div class="amount-btn">৳ 3,000</div>
+            <div class="amount-btn">৳ 5,000</div>
         </div>
 
-        <!-- ব্যানার বা হেডার -->
-        <div class="casino-header">
-            <div class="header-title">
-                <span class="rec">RECOMMENDED</span>
-                <span class="live">LIVE CASINO</span>
-            </div>
-        </div>
-
-        <!-- ৬টি গেমের লিস্ট -->
-        <div class="casino-grid">
-            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300');">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                </div>
-                <p>Crazy Time</p>
-            </a>
-            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=300');">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                </div>
-                <p>Ice Fishing</p>
-            </a>
-            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300');">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                </div>
-                <p>Bac Bo</p>
-            </a>
-            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=300');">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                </div>
-                <p>Funky Time</p>
-            </a>
-            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511193311914-0346f16efe90?w=300');">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                </div>
-                <p>Mega Wheel</p>
-            </a>
-            <a href="#" class="casino-card" onclick="alert('গেম খেলতে প্রথমে ডিপোজিট করুন!')">
-                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1596838132731-3301c3fd4317?w=300');">
-                    <i class="fa-regular fa-heart fav-icon"></i>
-                </div>
-                <p>Auto-Roulette</p>
-            </a>
+        <div class="wallet-label" style="color: #ff6b6b;">সেন মানির TrxID নাম্বারটি লিখুন (প্রয়োজন)</div>
+        <input type="text" class="trx-input" placeholder="TrxID অবশ্যই পূরণ করতে হবে!">
+        
+        <button class="confirm-btn">নিশ্চিত করুন</button>
+        
+        <div class="warning-text">
+            <strong>সতর্কতা:</strong> লেনদেন আইডি সঠিকভাবে পূরণ করতে হবে, অন্যথায় স্কੋਰ ব্যর্থ হবে! অনুগ্রহ করে নিশ্চিত হয়ে নিন যে আপনি সঠিক নম্বরে সেন মানি করেছেন।
         </div>
     </div>
 
-    <!-- ডিপোজিট ফর্ম পপ-আপ -->
-    <div class="modal" id="depositModal">
-        <div class="modal-content">
-            <h3>Deposit Money</h3>
-            <div class="notice-box">
-                Bkash / Nagad Personal Number:<br>
-                <span>01906531772</span><br>
-                <small style="color: #94a3b8;">(প্রথমে সেন্ড মানি করুন)</small>
-            </div>
-            <div class="form-group">
-                <label>Payment Method</label>
-                <select id="depMethod">
-                    <option value="Bkash">Bkash</option>
-                    <option value="Nagad">Nagad</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Amount (BDT)</label>
-                <input type="number" id="depAmount" placeholder="Enter amount">
-            </div>
-            <div class="form-group">
-                <label>Sender Number / TrxID</label>
-                <input type="text" id="depTrx" placeholder="Enter TrxID or Number">
-            </div>
-            <button class="submit-btn" onclick="sendDepositWhatsApp()">Confirm Deposit</button>
-            <button class="submit-btn close-modal" onclick="closeModal('depositModal')">Cancel</button>
+    <!-- হট গেমস সেকশন -->
+    <h3 class="section-title">Hot Games</h3>
+    <div class="games-grid">
+        <div class="game-card">
+            <img src="https://via.placeholder.com/100" alt="Game">
+            <span>Super Ace</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/100" alt="Game">
+            <span>Aviator</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/100" alt="Game">
+            <span>Fortune Gems</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/100" alt="Game">
+            <span>Boxing King</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/100" alt="Game">
+            <span>Money Coming</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/100" alt="Game">
+            <span>7Up 7Down</span>
         </div>
     </div>
 
-    <!-- উইথড্র ফর্ম পপ-আপ -->
-    <div class="modal" id="withdrawModal">
-        <div class="modal-content">
-            <h3>Withdraw Money</h3>
-            <div class="notice-box" style="border-color: #ef4444;">
-                উইথড্র রিকোয়েস্ট দেওয়ার পর <br><span>১০ মিনিট থেকে ২৪ ঘণ্টার মধ্যে</span> পেমেন্ট পেয়ে যাবেন।
-            </div>
-            <div class="form-group">
-                <label>Withdraw Method</label>
-                <select id="witMethod">
-                    <option value="Bkash">Bkash</option>
-                    <option value="Nagad">Nagad</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Amount (BDT)</label>
-                <input type="number" id="witAmount" placeholder="Enter amount">
-            </div>
-            <div class="form-group">
-                <label>Your Personal Account Number</label>
-                <input type="text" id="witNumber" placeholder="Enter your Bkash/Nagad number">
-            </div>
-            <button class="submit-btn withdraw-submit" onclick="sendWithdrawWhatsApp()">Submit Withdraw</button>
-            <button class="submit-btn close-modal" onclick="closeModal('withdrawModal')">Cancel</button>
-        </div>
-    </div>
-
-    <!-- নিচের ফিক্সড নেভিগেশন বার -->
-    <div class="bottom-nav">
-        <a href="#" class="nav-item active">
-            <i class="fa-solid fa-house"></i>
-            <span>Home</span>
-        </a>
-        <a class="nav-item" onclick="openDepositModal()">
-            <div class="nav-action-btn">Deposit</div>
-        </a>
-        <a class="nav-item" onclick="openWithdrawModal()">
-            <div class="nav-action-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);">Withdraw</div>
-        </a>
-        <a href="https://wa.me/8801906531772" target="_blank" class="nav-item">
-            <i class="fa-solid fa-user"></i>
-            <span>Account</span>
-        </a>
-    </div>
-
-    <!-- ফ্লোটিং হোয়াটসঅ্যাপ ও টেলিগ্রাম বাটন -->
-    <div class="floating-widgets">
-        <a href="https://wa.me/8801906531772" target="_blank" class="float-btn whatsapp-btn">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <a href="https://t.me/your-username" target="_blank" class="float-btn telegram-btn">
-            <i class="fa-brands fa-telegram"></i>
-        </a>
-    </div>
-
-    <script>
-        function openDepositModal() {
-            document.getElementById('depositModal').style.display = 'flex';
-        }
-        function openWithdrawModal() {
-            document.getElementById('withdrawModal').style.display = 'flex';
-        }
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function sendDepositWhatsApp() {
-            let method = document.getElementById('depMethod').value;
-            let amount = document.getElementById('depAmount').value;
-            let trx = document.getElementById('depTrx').value;
-
-            if(!amount || !trx) {
-                alert('দয়া করে টাকার পরিমাণ এবং ট্রানজেকশন আইডি দিন!');
-                return;
-            }
-
-            let message = `New Deposit Request!%0AMethod: ${method}%0AAmount: ${amount} BDT%0ATrxID: ${trx}`;
-            window.open(`https://wa.me/8801906531772?text=${message}`, '_blank');
-            closeModal('depositModal');
-        }
-
-        function sendWithdrawWhatsApp() {
-    let method = document.getElementById('witMethod').value;
-    let amount = document.getElementById('witAmount').value;
-    let number = document.getElementById('witNumber').value;
-
-    if (!amount || !number) {
-        alert('দয়া করে টাকার পরিমাণ এবং আপনার অ্যাকাউন্ট নম্বর দিন!');
-        return;
-    }
-
-    // হোয়াটসঅ্যাপে মেসেজ পাঠানোর কোড
-    let whatsappMessage = `New Withdraw Request!%0AMethod: ${method}%0AAmount: ${amount} BDT%0AReceive Number: ${number}`;
-    window.open(`https://wa.me/8801906531772?text=${whatsappMessage}`);
-
-    // টেলিগ্রামে মেসেজ পাঠানোর কোড
-    const botToken = '8677610886:AAHT9ImFz9Lfx5AlDY41I7XMjZQq';
-    const chatId = '8677610886';
-    let telegramMessage = `🔔 নতুন উইথড্র রিকোয়েস্ট!\n\n💳 মাধ্যম: ${method}\n💰 পরিমাণ: ৳${amount}\n📱 নম্বর: ${number}`;
+</body>
+    </html>
     
-    const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}`;
-
-    fetch(telegramUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.ok) {
-                console.log('টেলিগ্রামে সফলভাবে গেছে');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-
-    closeModal('withdrawModal');
-}
-</script>
