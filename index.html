@@ -150,7 +150,7 @@
         .modal-content {
             background: #fff;
             width: 90%;
-            max-width: 350px;
+            max-width: 360px;
             padding: 20px;
             border-radius: 15px;
             text-align: center;
@@ -163,7 +163,7 @@
             margin-bottom: 10px;
         }
         .notice-text {
-            font-size: 14px;
+            font-size: 13px;
             color: #d9534f;
             font-weight: bold;
             margin-bottom: 10px;
@@ -175,25 +175,35 @@
             font-size: 18px;
             font-weight: bold;
             border-radius: 8px;
-            margin: 10px 0 15px;
+            margin: 8px 0;
             letter-spacing: 1px;
         }
-        .copy-btn, .close-btn {
-            padding: 10px 20px;
+        .input-box {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .copy-btn, .submit-btn, .close-btn {
+            padding: 10px 15px;
             border: none;
             border-radius: 6px;
             font-weight: bold;
             cursor: pointer;
-            margin: 5px;
+            font-size: 13px;
         }
-        .copy-btn {
-            background: #28a745;
-            color: white;
-        }
-        .close-btn {
-            background: #dc3545;
-            color: white;
-        }
+        .copy-btn { background: #17a2b8; color: white; }
+        .submit-btn { background: #28a745; color: white; }
+        .close-btn { background: #dc3545; color: white; }
     </style>
 </head>
 <body>
@@ -247,8 +257,18 @@
         <p class="notice-text">⚠️ শুধুমাত্র সেন্ড মানি করে ডিপোজিট করবেন। ৫ মিনিটের ভেতরে টাকা পেয়ে যাবেন।</p>
         <p style="font-size: 13px; color: #555;">বিকাশ/নগদ/রকেট পার্সোনাল নাম্বার:</p>
         <div class="number-box" id="num">01906531772</div>
+        
         <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
-        <button class="close-btn" onclick="closeDeposit()">Close</button>
+
+        <hr style="margin: 15px 0; border: 0.5px solid #eee;">
+
+        <input type="number" id="amount" class="input-box" placeholder="টাকার পরিমাণ লিখুন (Amount)">
+        <input type="text" id="trxId" class="input-box" placeholder="ট্রানজেকশন আইডি লিখুন (TrxID)">
+
+        <div class="btn-group">
+            <button class="submit-btn" onclick="submitDeposit()">Submit</button>
+            <button class="close-btn" onclick="closeDeposit()">Close</button>
+        </div>
     </div>
 </div>
 
@@ -270,8 +290,22 @@
         navigator.clipboard.writeText(numText);
         alert('নাম্বারটি কপি করা হয়েছে: ' + numText);
     }
+
+    function submitDeposit() {
+        var amount = document.getElementById('amount').value;
+        var trx = document.getElementById('trxId').value;
+
+        if(!amount || !trx) {
+            alert('অনুগ্রহ করে টাকার পরিমাণ এবং TrxID দিন!');
+            return;
+        }
+
+        alert('আপনার ডিপোজিট রিকোয়েস্ট সফল হয়েছে!\nপরিমাণ: ৳' + amount + '\nTrxID: ' + trx);
+        document.getElementById('amount').value = '';
+        document.getElementById('trxId').value = '';
+        closeDeposit();
+    }
 </script>
 
 </body>
-            </html>
-                                                                                
+</html>
