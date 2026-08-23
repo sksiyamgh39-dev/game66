@@ -1,299 +1,43 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game66 - Click Game</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #0b1020;
-      color: white;
-    }
-
-    header {
-      background: linear-gradient(135deg, #151b35, #242b55);
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid #343b64;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #5ee7ff;
-    }
-
-    .menu {
-      display: flex;
-      gap: 10px;
-    }
-
-    .menu a {
-      color: white;
-      text-decoration: none;
-      padding: 9px 13px;
-      border-radius: 8px;
-    }
-
-    .menu a:hover {
-      background: #343b64;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-      background:
-        radial-gradient(circle at top, #263a76, #0b1020 65%);
-    }
-
-    .hero h1 {
-      font-size: 40px;
-      color: #5ee7ff;
-      margin-bottom: 12px;
-    }
-
-    .hero p {
-      color: #c8cee8;
-      margin-bottom: 22px;
-    }
-
-    .section {
-      max-width: 700px;
-      margin: auto;
-      padding: 35px 20px;
-      text-align: center;
-    }
-
-    .game-box {
-      background: #151b35;
-      border: 1px solid #30385e;
-      border-radius: 22px;
-      padding: 35px 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.3);
-    }
-
-    .game-icon {
-      font-size: 75px;
-      margin-bottom: 15px;
-    }
-
-    .game-box h2 {
-      margin-bottom: 10px;
-    }
-
-    .game-box p {
-      color: #aeb6d5;
-      margin-bottom: 25px;
-    }
-
-    .score-title {
-      color: #9ea8c7;
-      font-size: 15px;
-    }
-
-    #score {
-      font-size: 50px;
-      font-weight: bold;
-      color: #5ee7ff;
-      margin: 8px 0 25px;
-    }
-
-    #clickButton {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      border: 5px solid #5ee7ff;
-      background: linear-gradient(145deg, #243b78, #111936);
-      color: white;
-      font-size: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 25px rgba(94,231,255,.25);
-      transition: .12s;
-    }
-
-    #clickButton:active {
-      transform: scale(.92);
-    }
-
-    #clickButton:hover {
-      box-shadow: 0 0 35px rgba(94,231,255,.5);
-    }
-
-    #message {
-      min-height: 25px;
-      margin-top: 22px;
-      color: #8ff0ff;
-    }
-
-    .reset {
-      margin-top: 20px;
-      background: #30385e;
-      border: 0;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .reset:hover {
-      background: #414c78;
-    }
-
-    .info {
-      margin-top: 25px;
-      background: #11182d;
-      border-radius: 15px;
-      padding: 18px;
-      color: #9da7c2;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      margin-top: 25px;
-      background: #080c18;
-      color: #8d96b8;
-    }
-
-    @media (max-width: 600px) {
-      .logo {
-        font-size: 23px;
-      }
-
-      .menu a {
-        font-size: 12px;
-        padding: 7px;
-      }
-
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      #clickButton {
-        width: 160px;
-        height: 160px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <div class="logo">🎮 Game66</div>
-
-    <nav class="menu">
-      <a href="#home">Home</a>
-      <a href="#game">Game</a>
-    </nav>
-  </header>
-
-  <section class="hero" id="home">
-    <h1>Game66 Click Game</h1>
-    <p>কত দ্রুত ক্লিক করে নিজের স্কোর বাড়াতে পারেন?</p>
-  </section>
-
-  <section class="section" id="game">
-
-    <div class="game-box">
-
-      <div class="game-icon">👆</div>
-
-      <h2>Click Challenge</h2>
-
-      <p>
-        নিচের বাটনে ক্লিক করুন এবং যত বেশি পারেন স্কোর করুন!
-      </p>
-
-      <div class="score-title">YOUR SCORE</div>
-
-      <div id="score">0</div>
-
-      <button id="clickButton" onclick="addPoint()">
-        CLICK!
-      </button>
-
-      <div id="message">
-        Game শুরু করতে CLICK করুন 🎮
-      </div>
-
-      <button class="reset" onclick="resetGame()">
-        Reset Score
-      </button>
-
-    </div>
-
-    <div class="info">
-      🎮 এটি একটি সম্পূর্ণ ফ্রি ডেমো গেম।
-      এখানে কোনো টাকা, ডিপোজিট, বাজি বা নগদ পুরস্কার নেই।
-    </div>
-
-  </section>
-
-  <footer>
-    © 2026 Game66 — Free Gaming Website
-  </footer>
-
-  <script>
-
-    let score = 0;
-
-    function addPoint() {
-
-      score++;
-
-      document.getElementById("score").innerText = score;
-
-      if (score === 10) {
-        document.getElementById("message").innerText =
-          "🔥 10 Points! দারুণ!";
-      }
-
-      else if (score === 25) {
-        document.getElementById("message").innerText =
-          "⚡ 25 Points! অসাধারণ!";
-      }
-
-      else if (score === 50) {
-        document.getElementById("message").innerText =
-          "🏆 50 Points! আপনি দুর্দান্ত!";
-      }
-
-      else if (score % 100 === 0) {
-        document.getElementById("message").innerText =
-          "🎉 " + score + " Points! Amazing!";
-      }
-
-    }
-
-    function resetGame() {
-
-      score = 0;
-
-      document.getElementById("score").innerText = "0";
-
-      document.getElementById("message").innerText =
-        "Game শুরু করতে CLICK করুন 🎮";
-
-    }
-
-  </script>
-
-</body>
-</html>
+<div class="card">
+  <h2>🔐 Account Activation</h2>
+
+  <p>অ্যাকাউন্ট অ্যাক্টিভ করতে হবে টাকা দিয়ে: <b>৳50</b></p>
+  <p>Demo bKash: <b>01906531772</b></p>
+
+  <button class="big-btn" onclick="activateDemo()">
+    Activate Account
+  </button>
+
+  <p id="status"></p>
+</div>
+
+<script>
+function activateDemo() {
+  document.getElementById("status").innerHTML =
+    "✅ Demo account activated successfully!";
+}
+</script>
+
+<style>
+.card {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 25px;
+  text-align: center;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 5px 20px #ccc;
+  font-family: Arial, sans-serif;
+}
+
+.big-btn {
+  width: 100%;
+  padding: 14px;
+  border: 0;
+  border-radius: 10px;
+  background: #198754;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+</style>
