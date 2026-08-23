@@ -133,6 +133,67 @@
         .nav-item.active {
             color: #007bff;
         }
+        
+        /* Pop-up Modal CSS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: #fff;
+            width: 90%;
+            max-width: 350px;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        .notice-text {
+            font-size: 14px;
+            color: #d9534f;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        .number-box {
+            background: #e9ecef;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            margin: 10px 0 15px;
+            letter-spacing: 1px;
+        }
+        .copy-btn, .close-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .copy-btn {
+            background: #28a745;
+            color: white;
+        }
+        .close-btn {
+            background: #dc3545;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -152,10 +213,10 @@
         <div class="balance-amount">৳1000.00</div>
         
         <div class="action-grid">
-            <button class="action-btn">💰 Deposit</button>
-            <button class="action-btn">💳 Withdraw</button>
-            <button class="action-btn">👛 Wallet</button>
-            <button class="action-btn">💎 VIP</button>
+            <button class="action-btn" onclick="openDeposit()">💰 Deposit</button>
+            <button class="action-btn" onclick="openGame('Withdraw')">💳 Withdraw</button>
+            <button class="action-btn" onclick="openGame('Wallet')">👛 Wallet</button>
+            <button class="action-btn" onclick="openGame('VIP')">💎 VIP</button>
         </div>
     </div>
 
@@ -173,17 +234,44 @@
 
     <div class="bottom-nav">
         <a href="#" class="nav-item active">🏠 Home</a>
-        <a href="#" class="nav-item">🎁 Deposit</a>
+        <a href="#" class="nav-item" onclick="openDeposit()">🎁 Deposit</a>
         <a href="#" class="nav-item">✈️ Game</a>
         <a href="#" class="nav-item">👤 Account</a>
     </div>
 </div>
 
+<!-- Deposit Modal Popup -->
+<div class="modal" id="depositModal">
+    <div class="modal-content">
+        <div class="modal-title">💰 Deposit Info</div>
+        <p class="notice-text">⚠️ শুধুমাত্র সেন্ড মানি করে ডিপোজিট করবেন। ৫ মিনিটের ভেতরে টাকা পেয়ে যাবেন।</p>
+        <p style="font-size: 13px; color: #555;">বিকাশ/নগদ/রকেট পার্সোনাল নাম্বার:</p>
+        <div class="number-box" id="num">01906531772</div>
+        <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
+        <button class="close-btn" onclick="closeDeposit()">Close</button>
+    </div>
+</div>
+
 <script>
-    function openGame(gameName) {
-        alert(gameName + ' গেমটি চালু হচ্ছে...');
+    function openGame(name) {
+        alert(name + ' অপশনটি শীঘ্রই চালু হবে!');
+    }
+
+    function openDeposit() {
+        document.getElementById('depositModal').style.display = 'flex';
+    }
+
+    function closeDeposit() {
+        document.getElementById('depositModal').style.display = 'none';
+    }
+
+    function copyNumber() {
+        var numText = document.getElementById('num').innerText;
+        navigator.clipboard.writeText(numText);
+        alert('নাম্বারটি কপি করা হয়েছে: ' + numText);
     }
 </script>
 
 </body>
-</html>
+            </html>
+                                                                                
