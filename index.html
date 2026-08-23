@@ -1,6 +1,189 @@
-<button onclick="openGame('Aviator')">Aviator</button>
-<button onclick="openGame('Win Go')">Win Go</button>
-<button onclick="openGame('Boom')">Boom</button>
-<button onclick="openGame('Chicken Road 2')">Chicken Road 2</button>
-<button onclick="openGame('Go Rush')">Go Rush</button>
-<button onclick="openGame('Money Coming')">Money Coming</button>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game66 Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+        }
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            padding-bottom: 70px;
+        }
+        .user-card {
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            padding: 20px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .avatar {
+            width: 60px;
+            height: 60px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #1976d2;
+        }
+        .user-info h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .user-info p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .balance-card {
+            background: #fff;
+            margin: -15px 15px 20px;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .balance-title {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .balance-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 20px;
+        }
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .action-btn {
+            background: #f8f9fa;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+        .games-section {
+            padding: 0 15px;
+        }
+        .games-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #333;
+        }
+        .game-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .game-btn {
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            text-decoration: none;
+        }
+        .nav-item.active {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="user-card">
+        <div class="avatar">👤</div>
+        <div class="user-info">
+            <h3>DEMO MEMBER</h3>
+            <p>UID | 451840</p>
+            <p>Last login: Demo</p>
+        </div>
+    </div>
+
+    <div class="balance-card">
+        <div class="balance-title">Total balance</div>
+        <div class="balance-amount">৳1000.00</div>
+        
+        <div class="action-grid">
+            <button class="action-btn">💰 Deposit</button>
+            <button class="action-btn">💳 Withdraw</button>
+            <button class="action-btn">👛 Wallet</button>
+            <button class="action-btn">💎 VIP</button>
+        </div>
+    </div>
+
+    <div class="games-section">
+        <div class="games-title">Games</div>
+        <div class="game-list">
+            <button class="game-btn" onclick="openGame('Aviator')">Aviator</button>
+            <button class="game-btn" onclick="openGame('Win Go')">Win Go</button>
+            <button class="game-btn" onclick="openGame('Boom')">Boom</button>
+            <button class="game-btn" onclick="openGame('Chicken Road')">Chicken Road</button>
+            <button class="game-btn" onclick="openGame('Go Rush')">Go Rush</button>
+            <button class="game-btn" onclick="openGame('Money Coming')">Money Coming</button>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">🏠 Home</a>
+        <a href="#" class="nav-item">🎁 Deposit</a>
+        <a href="#" class="nav-item">✈️ Game</a>
+        <a href="#" class="nav-item">👤 Account</a>
+    </div>
+</div>
+
+<script>
+    function openGame(gameName) {
+        alert(gameName + ' গেমটি চালু হচ্ছে...');
+    }
+</script>
+
+</body>
+</html>
