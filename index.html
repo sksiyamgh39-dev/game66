@@ -25,6 +25,23 @@
             display: block;
         }
 
+        /* ব্যাক অ্যারো বাটন স্টাইল */
+        .back-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .back-btn {
+            background: none;
+            border: none;
+            color: #f1c40f;
+            font-size: 26px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 5px;
+            line-height: 1;
+        }
+
         /* টপ হেডার */
         .top-header {
             display: flex;
@@ -204,13 +221,13 @@
 
         /* লগইন ও রেজিস্টার ফর্ম কন্টেইনার */
         .auth-box-container {
-            padding: 20px;
+            padding: 0 20px 20px 20px;
             max-width: 400px;
             margin: 0 auto;
         }
         .auth-brand {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         .auth-brand h1 {
             color: #d4af37;
@@ -342,7 +359,6 @@
 
     <!-- 1. হোমপেজ সেকশন -->
     <div id="home-page" class="page-section active">
-        <!-- টপ হেডার -->
         <div class="top-header">
             <div class="menu-logo-area">
                 <div class="menu-icon">☰</div>
@@ -354,12 +370,10 @@
             </div>
         </div>
 
-        <!-- অ্যানাউন্সমেন্ট বার -->
         <div class="announcement-bar">
             📢 হরের স্বপ্নের পরিকল্পনা আনুষ্ঠানিকভাবে চালু হয়েছে! 🎉🎉🎉
         </div>
 
-        <!-- ব্যানার -->
         <div class="banner-container">
             <div class="promo-banner">
                 <h2>CK44</h2>
@@ -367,14 +381,12 @@
             </div>
         </div>
 
-        <!-- ক্যাটাগরি ট্যাব -->
         <div class="category-tabs">
             <div class="tab-item active">🔥 HOT GAMES</div>
             <div class="tab-item">📁 FAVORITES</div>
             <div class="tab-item">🎰 SLOTS</div>
         </div>
 
-        <!-- হট গেমস সেকশন -->
         <div class="section-header">
             <span class="section-title">HOT GAMES</span>
             <button class="see-all-btn">See All</button>
@@ -410,6 +422,9 @@
 
     <!-- 2. রেজিস্টার পেজ সেকশন -->
     <div id="register-page" class="page-section">
+        <div class="back-header">
+            <button class="back-btn" onclick="showPage('home-page')">&lt;</button>
+        </div>
         <div class="auth-box-container">
             <div class="auth-brand">
                 <h1>CK44 <span style="color:#2ecc71">wintk</span></h1>
@@ -454,6 +469,9 @@
 
     <!-- 3. লগইন পেজ সেকশন -->
     <div id="login-page" class="page-section">
+        <div class="back-header">
+            <button class="back-btn" onclick="showPage('home-page')">&lt;</button>
+        </div>
         <div class="auth-box-container">
             <div class="auth-brand">
                 <h1>CK44 <span style="color:#2ecc71">wintk</span></h1>
@@ -492,7 +510,7 @@
         </div>
     </div>
 
-    <!-- বটম নেভিগেশন বার (হোমপেজে দেখাবে) -->
+    <!-- বটম নেভিগেশন বার -->
     <div class="bottom-nav">
         <a class="nav-item active" onclick="showPage('home-page')">
             <div>🏠</div>
@@ -518,17 +536,13 @@
 
     <script>
         function showPage(pageId) {
-            // সব পেজ লুকিয়ে ফেলা
             const pages = document.querySelectorAll('.page-section');
             pages.forEach(page => page.classList.remove('active'));
-            
-            // নির্দিষ্ট পেজটি দেখানো
             document.getElementById(pageId).classList.add('active');
-            
-            // স্ক্রিন সবসময় উপরে নিয়ে যাওয়া
             window.scrollTo(0, 0);
         }
     </script>
 
 </body>
-</html>
+    </html>
+                                                                        
