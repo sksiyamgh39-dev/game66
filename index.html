@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game66 Demo</title>
+    <title>Game66 - Aviator Live</title>
     <style>
         * {
             margin: 0;
@@ -12,90 +12,125 @@
             font-family: Arial, sans-serif;
         }
         body {
-            background-color: #f4f6f9;
+            background-color: #121212;
+            color: #fff;
             display: flex;
             justify-content: center;
         }
         .app-container {
             width: 100%;
             max-width: 480px;
-            background: #ffffff;
+            background: #1a1a1a;
             min-height: 100vh;
             position: relative;
             padding-bottom: 70px;
         }
         .user-card {
             background: linear-gradient(135deg, #ffc107, #ff9800);
-            padding: 20px;
+            padding: 15px;
             color: #fff;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
         }
-        .avatar {
-            width: 60px;
-            height: 60px;
-            background: #e0e0e0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: #1976d2;
-        }
-        .user-info h3 {
-            font-size: 20px;
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-        .user-info p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        .balance-card {
-            background: #fff;
-            margin: -15px 15px 20px;
-            padding: 20px;
+        .user-info h3 { font-size: 16px; font-weight: bold; }
+        .user-info p { font-size: 13px; opacity: 0.9; }
+        .balance-badge {
+            background: rgba(0,0,0,0.3);
+            padding: 8px 12px;
             border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .balance-title {
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        .balance-amount {
-            font-size: 32px;
             font-weight: bold;
-            color: #111;
-            margin-bottom: 20px;
+            font-size: 16px;
         }
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-        .action-btn {
-            background: #f8f9fa;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
+
+        /* Aviator Game Screen */
+        .aviator-box {
+            background: #0d1117;
+            height: 250px;
+            position: relative;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            gap: 8px;
-            font-weight: bold;
-            color: #333;
-            cursor: pointer;
+            overflow: hidden;
+            border-bottom: 2px solid #333;
         }
+        .multiplier {
+            font-size: 45px;
+            font-weight: bold;
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0,255,204,0.5);
+            z-index: 2;
+        }
+        .game-status {
+            font-size: 14px;
+            color: #ff4d4d;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .plane {
+            position: absolute;
+            font-size: 40px;
+            transition: transform 0.1s linear;
+            z-index: 1;
+        }
+
+        /* Betting Controls */
+        .bet-control-section {
+            padding: 15px;
+        }
+        .control-panel {
+            background: #222;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            border: 1px solid #333;
+        }
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .input-group label {
+            font-size: 14px;
+            color: #aaa;
+        }
+        .bet-input {
+            width: 120px;
+            padding: 8px;
+            background: #111;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            outline: none;
+        }
+        .btn-action {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-bet { background: #28a745; color: white; }
+        .btn-cashout { background: #ffc107; color: #111; display: none; }
+        .btn-bet:disabled { background: #555; cursor: not-allowed; }
+
+        /* Games List Grid */
         .games-section {
-            padding: 0 15px;
+            padding: 15px;
         }
         .games-title {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 12px;
-            color: #333;
+            margin-bottom: 10px;
+            color: #bbb;
         }
         .game-list {
             display: grid;
@@ -103,254 +138,308 @@
             gap: 10px;
         }
         .game-btn {
-            padding: 12px;
-            background: #007bff;
+            padding: 10px;
+            background: #2b3137;
             color: white;
             border: none;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
         }
+        .game-btn.active-game {
+            background: #ff9800;
+        }
+
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
             max-width: 480px;
-            background: #fff;
+            background: #111;
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #222;
         }
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
             font-size: 12px;
-            color: #666;
+            color: #888;
             text-decoration: none;
         }
-        .nav-item.active {
-            color: #007bff;
-        }
-        
-        /* Pop-up Modal CSS */
+        .nav-item.active { color: #ff9800; }
+
+        /* Modal Popups */
         .modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center; align-items: center;
             z-index: 1000;
         }
         .modal-content {
-            background: #fff;
-            width: 90%;
-            max-width: 360px;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            position: relative;
-        }
-        .modal-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ff9800;
-            margin-bottom: 10px;
-        }
-        .notice-text {
-            font-size: 13px;
-            color: #d9534f;
-            font-weight: bold;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-        .number-box {
-            background: #e9ecef;
-            padding: 10px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            margin: 8px 0;
-            letter-spacing: 1px;
+            background: #222; width: 90%; max-width: 360px;
+            padding: 20px; border-radius: 15px; text-align: center; color: #fff;
         }
         .input-box {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 14px;
-            outline: none;
+            width: 100%; padding: 10px; margin: 8px 0;
+            background: #111; border: 1px solid #444; color: #fff; border-radius: 6px;
         }
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        .copy-btn, .submit-btn, .close-btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 13px;
-        }
-        .copy-btn { background: #17a2b8; color: white; }
-        .submit-btn { background: #28a745; color: white; }
-        .close-btn { background: #dc3545; color: white; }
+        .btn-group { display: flex; gap: 8px; justify-content: center; margin-top: 10px; }
+        .submit-btn { background: #28a745; color: white; padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .close-btn { background: #dc3545; color: white; padding: 8px 15px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
+    <!-- User Header -->
     <div class="user-card">
-        <div class="avatar">👤</div>
         <div class="user-info">
             <h3>DEMO MEMBER</h3>
             <p>UID | 451840</p>
-            <p>Last login: Demo</p>
+        </div>
+        <div class="balance-badge" id="userBalance">৳1000.00</div>
+    </div>
+
+    <!-- Live Aviator Area -->
+    <div class="aviator-box">
+        <div class="plane" id="planeIcon">✈️</div>
+        <div class="multiplier" id="multiplierText">1.00x</div>
+        <div class="game-status" id="gameStatus">পরবর্তী রাউন্ড শুরু হচ্ছে...</div>
+    </div>
+
+    <!-- Betting Controls -->
+    <div class="bet-control-section">
+        <div class="control-panel">
+            <div class="input-group">
+                <label>বেট পরিমাণ (BDT):</label>
+                <input type="number" id="betAmount" class="bet-input" value="100">
+            </div>
+            <button class="btn-action btn-bet" id="betBtn" onclick="placeBet()">BET (শুরু করুন)</button>
+            <button class="btn-action btn-cashout" id="cashoutBtn" onclick="cashOut()">CASH OUT</button>
         </div>
     </div>
 
-    <div class="balance-card">
-        <div class="balance-title">Total balance</div>
-        <div class="balance-amount">৳1000.00</div>
-        
-        <div class="action-grid">
-            <button class="action-btn" onclick="openDeposit()">💰 Deposit</button>
-            <button class="action-btn" onclick="openWithdraw()">💳 Withdraw</button>
-            <button class="action-btn" onclick="openGame('Wallet')">👛 Wallet</button>
-            <button class="action-btn" onclick="openGame('VIP')">💎 VIP</button>
-        </div>
-    </div>
-
+    <!-- Games Selector -->
     <div class="games-section">
-        <div class="games-title">Games</div>
+        <div class="games-title">অন্যান্য গেমস</div>
         <div class="game-list">
-            <button class="game-btn" onclick="openGame('Aviator')">Aviator</button>
-            <button class="game-btn" onclick="openGame('Win Go')">Win Go</button>
-            <button class="game-btn" onclick="openGame('Boom')">Boom</button>
-            <button class="game-btn" onclick="openGame('Chicken Road')">Chicken Road</button>
-            <button class="game-btn" onclick="openGame('Go Rush')">Go Rush</button>
-            <button class="game-btn" onclick="openGame('Money Coming')">Money Coming</button>
+            <button class="game-btn active-game">Aviator Live</button>
+            <button class="game-btn" onclick="alert('উইন গো শীঘ্রই চালু হবে!')">Win Go</button>
+            <button class="game-btn" onclick="alert('বুম গেম শীঘ্রই চালু হবে!')">Boom</button>
+            <button class="game-btn" onclick="alert('মানি কামিং শীঘ্রই চালু হবে!')">Money Coming</button>
         </div>
     </div>
 
+    <!-- Bottom Nav -->
     <div class="bottom-nav">
         <a href="#" class="nav-item active">🏠 Home</a>
         <a href="#" class="nav-item" onclick="openDeposit()">🎁 Deposit</a>
-        <a href="#" class="nav-item">✈️ Game</a>
+        <a href="#" class="nav-item" onclick="openWithdraw()">💳 Withdraw</a>
         <a href="#" class="nav-item">👤 Account</a>
     </div>
 </div>
 
-<!-- Deposit Modal Popup -->
+<!-- Deposit Modal -->
 <div class="modal" id="depositModal">
     <div class="modal-content">
-        <div class="modal-title" style="color: #28a745;">💰 Deposit Info</div>
-        <p class="notice-text">⚠️ শুধুমাত্র সেন্ড মানি করে ডিপোজিট করবেন। ৫ মিনিটের ভেতরে টাকা পেয়ে যাবেন।</p>
-        <p style="font-size: 13px; color: #555;">বিকাশ/নগদ/রকেট পার্সোনাল নাম্বার:</p>
-        <div class="number-box" id="num">01906531772</div>
-        
-        <button class="copy-btn" onclick="copyNumber()">Copy Number</button>
-
-        <hr style="margin: 15px 0; border: 0.5px solid #eee;">
-
-        <input type="number" id="amount" class="input-box" placeholder="টাকার পরিমাণ লিখুন (Amount)">
-        <input type="text" id="trxId" class="input-box" placeholder="ট্রানজেকশন আইডি লিখুন (TrxID)">
-
+        <h3>💰 ডিপোজিট</h3>
+        <p style="font-size:12px; color:#aaa; margin:10px 0;">বিকাশ/নগদ পার্সোনাল: <b>01906531772</b></p>
+        <input type="number" id="depAmount" class="input-box" placeholder="টাকার পরিমাণ">
+        <input type="text" id="trxId" class="input-box" placeholder="TrxID দিন">
         <div class="btn-group">
-            <button class="submit-btn" onclick="submitDeposit()">Submit</button>
-            <button class="close-btn" onclick="closeDeposit()">Close</button>
+            <button class="submit-btn" onclick="submitDeposit()">জমা দিন</button>
+            <button class="close-btn" onclick="closeModal('depositModal')">বন্ধ</button>
         </div>
     </div>
 </div>
 
-<!-- Withdraw Modal Popup -->
+<!-- Withdraw Modal -->
 <div class="modal" id="withdrawModal">
     <div class="modal-content">
-        <div class="modal-title">💳 Withdraw Request</div>
-        <p class="notice-text">⚠️ ২০০ টাকা থেকে ২৫০০০ টাকা পর্যন্ত উত্তোলন করতে পারবেন।</p>
-
-        <input type="number" id="wAmount" class="input-box" placeholder="উইথড্র টাকার পরিমাণ (200 - 25000)">
-        <input type="text" id="wNumber" class="input-box" placeholder="আপনার বিকাশ/নগদ নাম্বার">
-
+        <h3>💳 উইথড্র (২০০ - ২৫০০০ টাকা)</h3>
+        <input type="number" id="wAmount" class="input-box" placeholder="টাকার পরিমাণ">
+        <input type="text" id="wNumber" class="input-box" placeholder="বিকাশ/নগদ নাম্বার">
         <div class="btn-group">
-            <button class="submit-btn" onclick="submitWithdraw()">Submit</button>
-            <button class="close-btn" onclick="closeWithdraw()">Close</button>
+            <button class="submit-btn" onclick="submitWithdraw()">উত্তোলন করুন</button>
+            <button class="close-btn" onclick="closeModal('withdrawModal')">বন্ধ</button>
         </div>
     </div>
 </div>
 
 <script>
-    function openGame(name) {
-        alert(name + ' অপশনটি শীঘ্রই চালু হবে!');
+    let balance = 1000.00;
+    let currentMultiplier = 1.00;
+    let gameInterval = null;
+    let isPlaying = false;
+    let hasCashedOut = false;
+    let currentBet = 0;
+    let crashPoint = 1.00;
+
+    function updateBalanceUI() {
+        document.getElementById('userBalance').innerText = '৳' + balance.toFixed(2);
     }
 
-    function openDeposit() {
-        document.getElementById('depositModal').style.display = 'flex';
+    // Aviator Game Logic
+    function startRound() {
+        let statusEl = document.getElementById('gameStatus');
+        let multEl = document.getElementById('multiplierText');
+        let planeEl = document.getElementById('planeIcon');
+        let betBtn = document.getElementById('betBtn');
+
+        statusEl.innerText = "রাউন্ড শুরু হচ্ছে...";
+        statusEl.style.color = "#ffc107";
+        
+        let countdown = 3;
+        let countInterval = setInterval(() => {
+            statusEl.innerText = `পরবর্তী রাউন্ড ${countdown} সেকেন্ডে...`;
+            countdown--;
+            if (countdown < 0) {
+                clearInterval(countInterval);
+                beginFlight();
+            }
+        }, 1000);
     }
 
-    function closeDeposit() {
-        document.getElementById('depositModal').style.display = 'none';
+    function beginFlight() {
+        let statusEl = document.getElementById('gameStatus');
+        let multEl = document.getElementById('multiplierText');
+        let planeEl = document.getElementById('planeIcon');
+        let betBtn = document.getElementById('betBtn');
+        let cashoutBtn = document.getElementById('cashoutBtn');
+
+        statusEl.innerText = "প্লেন উড়ছে!";
+        statusEl.style.color = "#00ffcc";
+
+        currentMultiplier = 1.00;
+        hasCashedOut = false;
+        
+        // Random crash point between 1.20x and 10.00x
+        crashPoint = (Math.random() * (10 - 1.2) + 1.2).toFixed(2);
+
+        // If user placed a bet before flight
+        if (isPlaying) {
+            betBtn.style.display = 'none';
+            cashoutBtn.style.display = 'block';
+        }
+
+        let posX = 20;
+        let posY = 180;
+
+        gameInterval = setInterval(() => {
+            currentMultiplier += 0.03;
+            multEl.innerText = currentMultiplier.toFixed(2) + 'x';
+
+            // Move plane animation
+            posX += 1.5;
+            posY -= 1.2;
+            if(posX < 300) {
+                planeEl.style.left = posX + 'px';
+                planeEl.style.bottom = posY + 'px';
+            }
+
+            // Check if crashed
+            if (currentMultiplier >= crashPoint) {
+                clearInterval(gameInterval);
+                crashGame();
+            }
+        }, 100);
     }
 
-    function openWithdraw() {
-        document.getElementById('withdrawModal').style.display = 'flex';
+    function crashGame() {
+        let statusEl = document.getElementById('gameStatus');
+        let planeEl = document.getElementById('planeIcon');
+        let betBtn = document.getElementById('betBtn');
+        let cashoutBtn = document.getElementById('cashoutBtn');
+
+        statusEl.innerText = `ফ্লাইট ক্র্যাশ করেছে! (${crashPoint}x)`;
+        statusEl.style.color = "#ff4d4d";
+
+        if (isPlaying && !hasCashedOut) {
+            // Lost the bet
+            isPlaying = false;
+        }
+
+        betBtn.style.display = 'block';
+        cashoutBtn.style.display = 'none';
+        betBtn.disabled = false;
+
+        planeEl.style.left = '20px';
+        planeEl.style.bottom = '20px';
+
+        setTimeout(startRound, 4000);
     }
 
-    function closeWithdraw() {
-        document.getElementById('withdrawModal').style.display = 'none';
-    }
-
-    function copyNumber() {
-        var numText = document.getElementById('num').innerText;
-        navigator.clipboard.writeText(numText);
-        alert('নাম্বারটি কপি করা হয়েছে: ' + numText);
-    }
-
-    function submitDeposit() {
-        var amount = document.getElementById('amount').value;
-        var trx = document.getElementById('trxId').value;
-
-        if(!amount || !trx) {
-            alert('অনুগ্রহ করে টাকার পরিমাণ এবং TrxID দিন!');
+    function placeBet() {
+        let amount = parseFloat(document.getElementById('betAmount').value);
+        if (isNaN(amount) || amount <= 0) {
+            alert('সঠিক বেট পরিমাণ দিন!');
+            return;
+        }
+        if (amount > balance) {
+            alert('আপনার পর্যাপ্ত ব্যালেন্স নেই!');
             return;
         }
 
-        alert('আপনার ডিপোজিট রিকোয়েস্ট সফল হয়েছে!\nপরিমাণ: ৳' + amount + '\nTrxID: ' + trx);
-        document.getElementById('amount').value = '';
-        document.getElementById('trxId').value = '';
-        closeDeposit();
+        balance -= amount;
+        currentBet = amount;
+        updateBalanceUI();
+
+        isPlaying = true;
+        document.getElementById('betBtn').disabled = true;
+        document.getElementById('betBtn').innerText = "বেট গৃহীত হয়েছে";
+    }
+
+    function cashOut() {
+        if (!isPlaying || hasCashedOut) return;
+
+        hasCashedOut = true;
+        let winAmount = currentBet * currentMultiplier;
+        balance += winAmount;
+        updateBalanceUI();
+
+        alert('অভিনন্দন! আপনি জিতেছেন: ৳' + winAmount.toFixed(2));
+        
+        document.getElementById('cashoutBtn').style.display = 'none';
+        document.getElementById('betBtn').style.display = 'block';
+        document.getElementById('betBtn').disabled = false;
+        document.getElementById('betBtn').innerText = "BET (শুরু করুন)";
+        isPlaying = false;
+    }
+
+    // Deposit & Withdraw Modals
+    function openDeposit() { document.getElementById('depositModal').style.display = 'flex'; }
+    function openWithdraw() { document.getElementById('withdrawModal').style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+    function submitDeposit() {
+        let amt = document.getElementById('depAmount').value;
+        let trx = document.getElementById('trxId').value;
+        if(!amt || !trx) { alert('সব তথ্য দিন!'); return; }
+        alert('ডিপোজিট রিকোয়েস্ট সফল হয়েছে!');
+        closeModal('depositModal');
     }
 
     function submitWithdraw() {
-        var amount = Number(document.getElementById('wAmount').value);
-        var number = document.getElementById('wNumber').value;
-
-        if(!amount || !number) {
-            alert('অনুগ্রহ করে টাকার পরিমাণ এবং নাম্বার দিন!');
-            return;
-        }
-
-        if(amount < 200 || amount > 25000) {
-            alert('উইথড্র পরিমাণ ২০০ টাকা থেকে ২৫০০০ টাকার মধ্যে হতে হবে!');
-            return;
-        }
-
-        alert('আপনার উইথড্র রিকোয়েস্ট সফল হয়েছে!\nপরিমাণ: ৳' + amount + '\nনাম্বার: ' + number);
-        document.getElementById('wAmount').value = '';
-        document.getElementById('wNumber').value = '';
-        closeWithdraw();
+        let amt = Number(document.getElementById('wAmount').value);
+        let num = document.getElementById('wNumber').value;
+        if(!amt || !num) { alert('সব তথ্য দিন!'); return; }
+        if(amt < 200 || amt > 25000) { alert('উইথড্র ২০০ থেকে ২৫০০০ টাকার মধ্যে হতে হবে!'); return; }
+        alert('উইথড্র রিকোয়েস্ট সফল হয়েছে!');
+        closeModal('withdrawModal');
     }
+
+    // Auto start game on load
+    window.onload = function() {
+        startRound();
+    };
 </script>
 
 </body>
-                </html>
-            
+    </html>
+                
