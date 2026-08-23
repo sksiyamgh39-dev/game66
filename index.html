@@ -1,4 +1,4 @@
-        .      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
@@ -14,177 +14,296 @@
         body {
             background-color: #0b1e1d;
             color: #ffffff;
-            padding: 15px;
+            padding-bottom: 70px; /* নিচের নেভিগেশন বারের জন্য জায়গা */
         }
-        /* লোগো ও ব্র্যান্ডিং */
-        .brand-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .brand-logo {
-            background: linear-gradient(135deg, #d4af37, #aa771c);
-            color: #0b1e1d;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 8px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            border: 2px solid #e5c158;
-            letter-spacing: 2px;
-        }
-        .brand-sub {
-            font-size: 22px;
-            font-weight: bold;
-            color: #e5c158;
-            margin-top: 5px;
-        }
-        .brand-sub span {
-            color: #2ecc71;
-        }
-
-        /* লগইন ফর্ম স্টাইল */
-        .auth-container {
-            background: rgba(15, 31, 30, 0.95);
-            border: 1px solid #1b3b38;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .auth-title {
-            text-align: center;
-            font-size: 20px;
-            color: #e5c158;
-            margin-bottom: 5px;
-        }
-        .auth-subtitle {
-            text-align: center;
-            font-size: 13px;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
-        .auth-subtitle a {
-            color: #2ecc71;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .input-group {
-            position: relative;
-            margin-bottom: 12px;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px 12px 40px;
-            background: #0f1f1e;
-            border: 1px solid #1b3b38;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 14px;
-        }
-        .input-group span {
-            position: absolute;
-            left: 12px;
-            top: 14px;
-            color: #2ecc71;
-        }
-        .form-options {
+        
+        /* টপ হেডার */
+        .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
-            color: #ccc;
-            margin-bottom: 15px;
+            padding: 12px 15px;
+            background: #0f1f1e;
+            border-bottom: 1px solid #1b3b38;
         }
-        .remember-me {
+        .menu-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .menu-icon {
+            font-size: 22px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .brand-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .brand-title span {
+            color: #2ecc71;
+        }
+        .header-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .btn-login {
+            background: transparent;
+            border: 1px solid #2ecc71;
+            color: #2ecc71;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .btn-register {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            border: none;
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* অ্যানাউন্সমেন্ট বার */
+        .announcement-bar {
+            background: #142a28;
+            padding: 8px 15px;
+            font-size: 12px;
+            color: #f1c40f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #1b3b38;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ব্যানার সেকশন */
+        .banner-container {
+            padding: 12px 15px;
+        }
+        .promo-banner {
+            background: linear-gradient(135deg, #4a154b, #2b0b2c);
+            border: 2px solid #e5c158;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+        .promo-banner h2 {
+            color: #2ecc71;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        .promo-banner p {
+            font-size: 11px;
+            color: #ddd;
+            line-height: 1.4;
+        }
+
+        /* ক্যাটাগরি ট্যাব */
+        .category-tabs {
+            display: flex;
+            gap: 10px;
+            padding: 10px 15px;
+            overflow-x: auto;
+        }
+        .tab-item {
+            background: #15312e;
+            border: 1px solid #234e4a;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
             display: flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
             cursor: pointer;
         }
-        .forgot-pass {
-            color: #e5c158;
-            text-decoration: none;
+        .tab-item.active {
+            background: linear-gradient(135deg, #1b4d47, #113632);
+            border-color: #2ecc71;
+            color: #2ecc71;
         }
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #f1c40f, #f39c12);
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            color: #000;
-            font-size: 16px;
-            cursor: pointer;
-            margin-bottom: 15px;
-        }
-        .social-login {
-            text-align: center;
-            border-top: 1px solid #1b3b38;
-            padding-top: 15px;
-        }
-        .social-login p {
-            font-size: 12px;
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-        .social-icons {
+
+        /* গেম সেকশন হেডার */
+        .section-header {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        .social-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: #1b3b38;
-            display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: bold;
+            padding: 10px 15px;
+        }
+        .section-title {
             font-size: 16px;
-            border: 1px solid #234e4a;
+            color: #2ecc71;
+            font-weight: bold;
+        }
+        .see-all-btn {
+            background: #b8860b;
+            color: #000;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
             cursor: pointer;
+        }
+
+        /* গেম গ্রিড */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 0 15px 15px 15px;
+        }
+        .game-card {
+            background: #132b28;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #1f423e;
+            text-align: center;
+        }
+        .game-card img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+        .game-card span {
+            display: block;
+            padding: 6px;
+            font-size: 11px;
+            color: #f1c40f;
+            font-weight: bold;
+            background: #0d1f1d;
+        }
+
+        /* বটম নেভিগেশন বার */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #0b1e1d;
+            border-top: 1px solid #1b3b38;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            z-index: 1000;
+        }
+        .nav-item {
+            text-align: center;
+            color: #aaa;
+            font-size: 11px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .nav-item.active {
+            color: #2ecc71;
+        }
+        .nav-item div:first-child {
+            font-size: 18px;
+            margin-bottom: 2px;
         }
     </style>
 </head>
 <body>
 
-    <!-- ব্র্যান্ডিং লোগো -->
-    <div class="brand-header">
-        <div class="brand-logo">CK44</div>
-        <div class="brand-sub">CK44 <span>wintk</span></div>
+    <!-- টপ হেডার -->
+    <div class="top-header">
+        <div class="menu-logo-area">
+            <div class="menu-icon">☰</div>
+            <div class="brand-title">CK44 <span>wintk</span></div>
+        </div>
+        <div class="header-buttons">
+            <button class="btn-login">Login</button>
+            <button class="btn-register">Register</button>
+        </div>
     </div>
 
-    <!-- লগইন ফর্ম সেকশন -->
-    <div class="auth-container">
-        <div class="auth-title">Login</div>
-        <div class="auth-subtitle">No account yet? <a href="#">Register</a></div>
-        
-        <div class="input-group">
-            <span>📞</span>
-            <input type="text" placeholder="Phone number">
-        </div>
-        <div class="input-group">
-            <span>🔒</span>
-            <input type="password" placeholder="Password">
-        </div>
+    <!-- অ্যানাউন্সমেন্ট বার -->
+    <div class="announcement-bar">
+        📢 হরের স্বপ্নের পরিকল্পনা আনুষ্ঠানিকভাবে চালু হয়েছে! 🎉🎉🎉
+    </div>
 
-        <div class="form-options">
-            <label class="remember-me">
-                <input type="checkbox" checked> Remember
-            </label>
-            <a href="#" class="forgot-pass">Forgot password?</a>
+    <!-- ব্যানার -->
+    <div class="banner-container">
+        <div class="promo-banner">
+            <h2>CK44</h2>
+            <p>পুরোনো লিঙ্ক এখন আর ব্যবহার করবেন না। নতুন অফিশিয়াল লিঙ্ক (শুধুমাত্র এগুলো ব্যবহার করুন): CK44.COM, CK44.BET...</p>
         </div>
+    </div>
 
-        <button class="submit-btn">Login</button>
+    <!-- ক্যাটাগরি ট্যাব -->
+    <div class="category-tabs">
+        <div class="tab-item active">🔥 HOT GAMES</div>
+        <div class="tab-item">📁 FAVORITES</div>
+        <div class="tab-item">🎰 SLOTS</div>
+    </div>
 
-        <div class="social-login">
-            <p>Or Connect With</p>
-            <div class="social-icons">
-                <div class="social-btn" style="background: #3b5998;">f</div>
-                <div class="social-btn" style="background: #db4437;">G</div>
-            </div>
+    <!-- হট গেমস সেকশন -->
+    <div class="section-header">
+        <span class="section-title">HOT GAMES</span>
+        <button class="see-all-btn">See All</button>
+    </div>
+
+    <div class="games-grid">
+        <div class="game-card">
+            <img src="https://via.placeholder.com/120x100?text=Super+Ace" alt="Super Ace">
+            <span>Super Ace</span>
         </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/120x100?text=Fiery+Sevens" alt="Fiery Sevens">
+            <span>Fiery Sevens</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/120x100?text=FlyX" alt="FlyX">
+            <span>FlyX</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/120x100?text=Aviator" alt="Aviator">
+            <span>Aviator</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/120x100?text=Wild+Bounty" alt="Wild Bounty">
+            <span>Wild Bounty</span>
+        </div>
+        <div class="game-card">
+            <img src="https://via.placeholder.com/120x100?text=Mighty+Train" alt="Mighty Train">
+            <span>Mighty Train</span>
+        </div>
+    </div>
+
+    <!-- বটম নেভিগেশন বার -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <div>🏠</div>
+            <div>Home</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div>🎁</div>
+            <div>Promotion</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div>👥</div>
+            <div>Invite</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div>🏆</div>
+            <div>Reward</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div>👤</div>
+            <div>Member</div>
+        </a>
     </div>
 
 </body>
