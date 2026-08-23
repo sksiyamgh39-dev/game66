@@ -195,6 +195,7 @@
             overflow: hidden;
             border: 1px solid #1f423e;
             text-align: center;
+            cursor: pointer;
         }
         .game-banner {
             width: 100%;
@@ -217,6 +218,41 @@
             color: #f1c40f;
             font-weight: bold;
             background: #0d1f1d;
+        }
+
+        /* গেম প্লে স্ক্রিন */
+        .game-play-container {
+            padding: 20px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .game-screen-box {
+            background: #132b28;
+            border: 2px solid #2ecc71;
+            border-radius: 12px;
+            padding: 30px 20px;
+            margin-top: 15px;
+        }
+        .game-screen-box h2 {
+            color: #f1c40f;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .game-screen-box p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .play-now-btn {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
         }
 
         /* লগইন ও রেজিস্টার ফর্ম কন্টেইনার */
@@ -474,29 +510,46 @@
         </div>
 
         <div class="games-grid">
-            <div class="game-card">
+            <div class="game-card" onclick="openGame('Super Ace')">
                 <div class="game-banner">👑 Super Ace</div>
                 <span>Super Ace</span>
             </div>
-            <div class="game-card">
+            <div class="game-card" onclick="openGame('Fiery Sevens')">
                 <div class="game-banner">🔥 Fiery Sevens</div>
                 <span>Fiery Sevens</span>
             </div>
-            <div class="game-card">
+            <div class="game-card" onclick="openGame('FlyX')">
                 <div class="game-banner">🚀 FlyX</div>
                 <span>FlyX</span>
             </div>
-            <div class="game-card">
+            <div class="game-card" onclick="openGame('Aviator')">
                 <div class="game-banner">✈️ Aviator</div>
                 <span>Aviator</span>
             </div>
-            <div class="game-card">
+            <div class="game-card" onclick="openGame('Wild Bounty')">
                 <div class="game-banner">🤠 Wild Bounty</div>
                 <span>Wild Bounty</span>
             </div>
-            <div class="game-card">
+            <div class="game-card" onclick="openGame('Mighty Train')">
                 <div class="game-banner">🚂 Mighty Train</div>
                 <span>Mighty Train</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- গেম প্লে পেজ সেকশন -->
+    <div id="game-page" class="page-section">
+        <div class="back-header">
+            <button class="back-btn" onclick="showPage('home-page')">&lt;</button>
+        </div>
+        <div class="game-play-container">
+            <div class="auth-brand">
+                <h1>CK44 <span style="color:#2ecc71">wintk</span></h1>
+            </div>
+            <div class="game-screen-box">
+                <h2 id="game-title-text">Game Name</h2>
+                <p>খেলা শুরু করার জন্য নিচের বাটনে ক্লিক করুন। শুভকামনা!</p>
+                <button class="play-now-btn" onclick="alert('গেমটি সফলভাবে লোড হয়েছে! খেলা উপভোগ করুন।')">Play Game</button>
             </div>
         </div>
     </div>
@@ -594,56 +647,4 @@
     <!-- পপ-আপ অ্যানাউন্সমেন্ট মোডাল -->
     <div id="announcement-modal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">✕</button>
-            <div class="modal-title">Announcement</div>
-            <div class="modal-body-box">
-                <h3>🎉 CK44 মেম্বার্স ডে-এর বিশাল ধামাকা 🎉</h3>
-                <p>প্রতি বুধবারের জন্য মেম্বারশিপ ডে বোনাস ১০ হাজার কোটি টাকা বিতরণ করা হয়। তাড়াতাড়ি খেলতে আসুন - পকেট ভর্তি টাকা জিতুন!</p>
-            </div>
-            <div class="modal-nav-btns">
-                <button class="modal-btn">Previous</button>
-                <button class="modal-btn" onclick="closeModal()">Next</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- বটম নেভিগেশন বার -->
-    <div class="bottom-nav">
-        <a class="nav-item active" onclick="showPage('home-page')">
-            <div>🏠</div>
-            <div>Home</div>
-        </a>
-        <a class="nav-item" onclick="showPage('home-page')">
-            <div>🎁</div>
-            <div>Promotion</div>
-        </a>
-        <a class="nav-item" onclick="showPage('home-page')">
-            <div>👥</div>
-            <div>Invite</div>
-        </a>
-        <a class="nav-item" onclick="showPage('home-page')">
-            <div>🏆</div>
-            <div>Reward</div>
-        </a>
-        <a class="nav-item" onclick="showPage('login-page')">
-            <div>👤</div>
-            <div>Member</div>
-        </a>
-    </div>
-
-    <script>
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.page-section');
-            pages.forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
-        function completeAuth() {
-            // হোমপেজে নিয়ে যাওয়া এবং অ্যানাউন্সমেন্ট পপ-আপ দেখানো
-            showPage('home-page');
-            document.getElementById('announcement-modal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('a
+            <button class="modal-close" onclick="clo
