@@ -1,31 +1,51 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মাইক্রোজব সাইট - আয় করুন ঘরে বসে</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// কাজের ডামি ডেটা (নিশ্চিত করার জন্য যে ডেটা আছে)
+const jobs = [
+    { id: 1, title: "ইউটিউব ভিডিও দেখতে হবে এবং সাবস্ক্রাইব করতে হবে", reward: 5.00, employer: "Admin" },
+    { id: 2, title: "ফেসবুক পেজে লাইক ও শেয়ার করুন", reward: 3.50, employer: "Tanvir" },
+    { id: 3, title: "একটি ওয়েবসাইটে সাইন আপ করুন (রেফার ছাড়া)", reward: 15.00, employer: "Rahim" }
+];
 
-    <!-- হেডার বা নেভিগেশন বার -->
-    <header>
-        <div class="logo">🎯 MicroJob BD</div>
-        <nav>
-            <a href="index.html" class="active">হোম</a>
-            <a href="post-job.html">কাজ পোস্ট করুন</a>
-            <a href="wallet.html">ওয়ালেট (<span id="balance">0.00</span>৳)</a>
-        </nav>
-    </header>
+let userBalance = 0.00;
 
-    <!-- মূল কন্টেন্ট: কাজের তালিকা -->
-    <main>
-        <h2>চলমান কাজসমূহ</h2>
-        <div id="job-list" class="job-container">
-            <!-- ডাইনামিক জব কার্ড এখানে আসবে -->
-        </div>
-    </main>
+// মূল ফাংশন যা কাজগুলো লোড করবে
+function loadJobs() {
+    const jobListContainer = document.getElementById("job-list");
+    
+    // নিশ্চিত হোন যে কন্টেইনারটি HTML এ আছে
+    if (!jobListContainer) {
+        console.error("ত্রুটি: 'job-list' আইডি যুক্ত ডিভটি HTML এ খুঁজে পাওয়া যায়নি।");
+        return;
+    }
 
-    <script src="script.js"></script>
-</body>
-</html>
+    jobListContainer.innerHTML = ""; // পুরানো তালিকা পরিষ্কার করুন
+
+    jobs.forEach(job => {
+        const jobCard = document.createElement("div");
+        jobCard.classList.add("job-card");
+
+        jobCard.innerHTML = `
+            <div class="job-info">
+                <h3>${job.title}</h3>
+                <p>পোস্টকারী: ${job.employer}</p>
+            </div>
+            <div>
+                <div class="job-price">${job.reward.toFixed(2)} ৳</div>
+                <button class="btn-apply" onclick="completeJob(${job.reward})">কাজ সম্পন্ন করুন</button>
+            </div>
+        `;
+        jobListContainer.appendChild(jobCard);
+    });
+}
+
+// ব্যালেন্স আপডেট করার ফাংশন
+function completeJob(reward) {
+    userBalance += reward;
+    const balanceElement = document.getElementById("balance");
+    if(balanceElement) {
+        balanceElement.innerText = userBalance.toFixed(2);
+    }
+    alert(`অভিনন্দন! আপনি সফলভাবে কাজটি সম্পন্ন করেছেন এবং ${reward} টাকা অর্জন করেছেন।`);
+}
+
+// পেজ লোড হলে কাজগুলো দেখাবে - এটি একটি নিশ্চিত পদ্ধতি
+document.addEventListener("DOMContentLoaded", loadJobs);
